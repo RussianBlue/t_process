@@ -1,0 +1,84 @@
+<%
+  modal ||= true
+  action ||= "create"
+  remote = modal ? true : false
+%>
+
+<%= form_for(@project, remote: remote, html: {role: :form, 'data-model' => 'project', :class => "form-horizontal"}) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <%= f.label :'제작년도 :', :class => 'col-sm-3 control-label'%>
+      <div class="col-sm-9">
+        <%= f.select :years, 
+              Project::YEARS,
+              :prompt => '과정년도를 선택해주세요.',
+              :class => 'form-control' %>
+        <span class="help-block"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :'프로젝트명 :', 
+      :class => 'col-sm-3 control-label'%>
+      <div class="col-sm-9">
+        <%= f.text_field :title, 
+                      :label => false, 
+                      :class => 'form-control'
+        %>
+        <span class="help-block"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :'개발물 가로 :', 
+      :class => 'col-sm-3 control-label'%>
+      <div class="col-sm-9">
+        <%= f.number_field :width, 
+                  :label => false, 
+                  :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :'개발물 세로 :', 
+      :class => 'col-sm-3 control-label'%>
+      <div class="col-sm-9">
+        <%= f.number_field :height, 
+                  :label => false, 
+                  :class => 'form-control' %>
+      </div>
+    </div>
+    <!-- 수정 할때만 보여야 할 부분 -->
+    <% if @project.id != nil %>
+      <div class="form-group">
+        <%= f.label :'프로젝트 종료 :', 
+        :class => 'col-sm-3 control-label'%>
+        <div class="col-sm-9">
+          <%= f.select :finish, 
+                Project::FINISH,
+                :class => 'form-control' %>
+        </div>
+      </div>
+    <% end %>
+    <!-- 수정 할때만 보여야 할 부분 -->
+  </div>
+  <div class="modal-footer">
+    <% if @project.id == nil %>
+      <%= f.submit '프로젝트 생성하기', class: 'btn btn-primary btn-sm', :remote => true %>
+    <% else %>
+      <%= f.submit '프로젝트 수정하기', class: 'btn btn-primary btn-sm', :remote => true %>
+    <% end %>
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">닫기</button>
+  </div>
+<% end %>

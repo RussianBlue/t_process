@@ -15,3 +15,20 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+function open_window(_url, _width, _height) 
+{
+  var openTarget = "_contents";
+  var nWidth= _width;
+  var nHeight = _height;
+  var sw = screen.availWidth;
+  var sh = screen.availHeight;
+  var px = 50 ;
+  var py = 50;
+  var openOption = "width = " + nWidth + ", height = " + nHeight + ", toolbar = no, top = " + py + ", left = " + px;
+
+  var openURL = _url;
+  w = window.open(openURL, openTarget, openOption);
+  w.focus();
+}

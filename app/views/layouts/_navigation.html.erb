@@ -1,19 +1,41 @@
-<%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
-    </div>
-    <div class="collapse navbar-collapse">
+<div class="navbar navbar-default" id="navbar">
+  <script type="text/javascript">
+      try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+  </script>
+
+  <div class="navbar-container" id="navbar-container">
+    <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+      <span class="sr-only">Toggle sidebar</span>
+
+      <span class="icon-bar"></span>
+
+      <span class="icon-bar"></span>
+
+      <span class="icon-bar"></span>
+    </button>
+
+    <div class="navbar-header pull-left">
+      <%= link_to '<small>트리짓소프트웨어</small>'.html_safe, root_path, :class => 'navbar-brand' %>
+      <ul class="nav navbar-nav">
+          <li class="">
+            <% if user_signed_in? %>
+              <a href="#">
+                <%= current_user.name %> 님 환영합니다.
+              </a>
+            <% end %>
+          </li>
+      </ul>
+    </div><!-- /.navbar-header -->
+  
+    <% if user_signed_in? %>
+      <div class="navbar-buttons navbar-header pull-right" role="navigation">
+    <% else %>
+      <div class="navbar-buttons navbar-header pull-left" role="navigation">
+    <% end %>
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
-      </ul>
-    </div>
-  </div>
-</nav>
+      </ul><!-- /.ace-nav -->
+    </div><!-- /.navbar-header -->
+  </div><!-- /.container -->
+</div><!-- /.navbar navbar-default -->
+

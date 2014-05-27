@@ -1,0 +1,28 @@
+<li class="<%= curriculum.id %>">
+	<div class="m_title" title="<%= curriculum.title %>" data-rel="tooltip" data-toggle="tooltip" data-placement="right">
+		<i class="icon-only ace-icon fa fa-folder"></i>
+		<span class="menu-text">
+			<%= truncate(curriculum.title.to_s, :length => 20) %>
+		</span>
+		<b class="arrow"></b>
+	</div>
+	<div class="m_sub">
+		<ul class="nav nav-list sub-menu-list">
+			<li class="documents">
+				<%= link_to '<i class="menu-icon fa fa-caret-right"></i>문서'.html_safe, notices_path(current_project, :category_id => 3, :curriculum_id => curriculum.id, :c_type => "documents") %>
+			</li>
+			<li class="scripts">
+				<%= link_to '<i class="menu-icon fa fa-caret-right"></i>원고'.html_safe, notices_path(current_project, :category_id => 4, :curriculum_id => curriculum.id, :c_type => "scripts" )%>
+			</li>
+			<li class="storyboards">
+				<%= link_to '<i class="menu-icon fa fa-caret-right"></i>스토리보드'.html_safe, notices_path(current_project, :category_id => 5, :curriculum_id => curriculum.id, :c_type => "storyboards") %>
+			</li>
+			<li class="progresses">
+				<%= link_to '<i class="menu-icon fa fa-caret-right"></i>공정률'.html_safe, curriculum_progresses_path(current_project, :curriculum_id => curriculum.id, :c_type => "progresses") %>
+			</li>
+			<li class="products">
+				<%= link_to '<i class="menu-icon fa fa-caret-right"></i>최종산출물'.html_safe, curriculum_products_path(current_project, :curriculum_id => curriculum.id, :c_type => "products") %>
+			</li>
+		</ul>
+	</div>
+</li>

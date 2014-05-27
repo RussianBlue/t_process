@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Curriculum:</strong>
+  <%= @product.curriculum_id %>
+</p>
+
+<p>
+  <strong>Lesson:</strong>
+  <%= @product.lesson %>
+</p>
+
+<p>
+  <strong>Content use:</strong>
+  <%= @product.content_use %>
+</p>
+
+<p>
+  <strong>P data:</strong>
+  <%= @product.p_data %>
+</p>
+
+<p>
+  <strong>S data:</strong>
+  <%= @product.s_data %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

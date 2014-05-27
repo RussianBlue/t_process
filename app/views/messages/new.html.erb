@@ -1,0 +1,12 @@
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  
+  <h3 class="header smaller lighter green">SMS <small> 메세지보내기</small> </h3>
+
+  <%= render 'form' %>
+	
+	<div class="hr hr-12 dotted hr-double"></div>
+	<div class="div-bottom-btnset">
+	<%= link_to '뒤로가기', messages_path(current_project), :class => 'btn btn-success btn-sm' %>
+</div>

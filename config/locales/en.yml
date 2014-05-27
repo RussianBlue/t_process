@@ -21,3 +21,25 @@
 
 en:
   hello: "Hello world"
+  errors:
+    messages:
+      inclusion: "목록에 포함되어 있습니다"
+      exclusion: "목록에 포함되어 있지 않습니다"
+      invalid: "맞지 않는 형식 입니다"
+      confirmation: "일치하지 않습니다"
+      accepted: "수락하여 주시기 바랍니다"
+      empty: "입력해 주시기 바랍니다"
+      blank: "입력해 주시기 바랍니다"
+      too_long: "%{count}글자 이내로 입력해 주시기 바랍니다"
+      too_short: "%{count}글자 이상으로 입력해 주시기 바랍니다"
+      wrong_length: "%{count}글자로 입력해 주시기 바랍니다"
+      taken: "이미 존재하는 값 입니다"
+      not_a_number: "숫자로 입력해 주시기 바랍니다"
+      greater_than: "%{count}이상을 요구합니다"
+      greater_than_or_equal_to: "%{count}과 같거나 이상을 요구합니다"
+      equal_to: "%{count}과 같아야 합니다"
+      less_than: "%{count}이하를 요구합니다"
+      less_than_or_equal_to: "%{count}과 같거나 이하을 요구합니다"
+      odd: "홀수을 요구합니다"
+      even: "짝수을 요구합니다"
+      record_invalid: "검증에 실패했습니다. %{errors}"

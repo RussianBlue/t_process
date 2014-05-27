@@ -1,23 +1,49 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign up</h3>
+    <div class="center">
+      <h1><span class="gray">트리짓소프트웨어</span></h1>
+      <h4 class="blue">공정관리 게시판</h4>
+    </div>
+
+    <div class="space-6"></div><!-- 공백 -->
+
+    <h4 class="header blue lighter bigger">
+      <i class="icon-coffee green"></i> Sign Up
+    </h4>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label :name, '이름 :' %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :email %>
+      <%= f.label :email, '이메일 :' %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :password %>
+      <%= f.label :password, '비밀번호 :' %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :password_confirmation %>
+      <%= f.label :password_confirmation, '비밀번호 확인 :' %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
-     <%= f.submit 'Sign up', :class => 'button right' %>
+    <div class="form-group">
+      <%= f.label :company, '회사명 :' %>
+      <%= f.text_field :company, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :role_type, '역할 :' %></br>
+      <%= f.select :role_type, 
+                    User::ROLE_TYPES,
+                    :prompt => '선택해주세요',
+                    class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :celp_no, '휴대폰 :' %>
+      <%= f.text_field :celp_no, class: 'form-control' %>
+      <p class="text-danger"> 휴대폰은 (-) 기호를 제외하고 입력하세요. </p>
+    </div>
+     <%= f.submit '회원가입', :class => 'btn btn-sm btn-success right' %>
+    <div class="space-6"></div>
   <% end %>
 </div>

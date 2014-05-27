@@ -1,0 +1,68 @@
+<%= simple_form_for(@board, 
+  :url => {
+    :action => @params_action}, 
+  :html => { 
+    :class => 'form-horizontal', 
+    :multipart => true, 
+    :role => 'form'
+  }) do |f| %>
+
+  <!-- <% if @board.errors.any? %>
+    <% @board.errors.full_messages.each do |message| %>
+      <p> <%= message %> </p>
+    <% end %>
+  <% end %>-->
+  
+  <div class="form-margin">
+    <%= f.label :pre_title, '<i class="ace-icon fa fa-chevron-right orange"></i> 머릿말'.html_safe, :class => 'form-label' %>
+    <%= f.input :pre_title,
+                :label => false,
+                :input_html => {:class => 'form-control'},
+                :collection => ['공지', '요청', '기타'],
+                :prompt => "머릿말을 선택해 주세요." %>
+
+    <%= f.label :title, '<i class="fa fa-chevron-right orange"></i> 제목'.html_safe, :class => 'form-label' %>
+    <%= f.input :title,
+                  :label => false,
+                  :input_html => {:class => 'form-control'} %>
+
+    <%= f.label :data, '<i class="fa fa-chevron-right orange"></i> 파일첨부'.html_safe, :class => 'form-label'%>
+    <%= f.file_field :data,
+                  :label => false,
+                  :class => 'form-control', 
+                  :as => :file %>
+    <% if @params_action == "update" && @board.data_file_name != nil%>
+      <dl>
+        <dt class="text-info">기존 파일 : <%= @board.data_file_name %> </dt>
+        <dd class="text-warning bigger-110 orange"> <i class="ace-icon fa fa-warning"></i> 업로드 시 기존 데이터는 삭제됩니다.</dd>
+      </dl>
+    <% end %>
+
+    <%= f.label :content, '<i class="fa fa-chevron-right  orange"></i> 내용'.html_safe, :class => 'form-label'%>
+    <%= f.input :content,
+                :label => false,
+                :as => :text,
+                :input_html => {:class => 'form-control', :rows => 15} %>
+
+    <div class="div-bottom-btnset">
+      <%= link_to '목록보기', notices_path(current_project), 
+                  :class         => 'btn btn-success btn-sm' %>
+      
+      <% if @params_action == "create" %>
+        <%= f.button  :submit, '저장하기', 
+                    :class         => 'btn-primary btn-sm', 
+                    :confirm       => '등록 하시겠습니까?'%>
+      <% else %>
+        <%= f.button  :submit, '수정하기', 
+                    :class         => 'btn-pink btn-sm', 
+                    :confirm       => '수정 하시겠습니까?'%>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    
+  });
+</script>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  curriculum_id: 1
+  lesson: 1
+  content_use: false
+  p_data: MyString
+  s_data: MyString
+
+two:
+  curriculum_id: 1
+  lesson: 1
+  content_use: false
+  p_data: MyString
+  s_data: MyString

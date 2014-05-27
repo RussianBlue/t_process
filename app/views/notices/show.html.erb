@@ -1,0 +1,72 @@
+<div class="page-content">
+	<%= render 'layouts/project_title' %>
+
+	<h3 class="header smaller lighter green"><%= current_category.name %> <small>글내용</small> </h3>
+
+  <div class="show_board">
+    <p>
+      <span class="sp-board-head">[ <%= @board.pre_title %> ]</span>
+      <span class="sp-board-title"> <%= @board.title %></span>
+      <span class="sp-board-date">등록일 : <%= @board.created_at %></span>
+    </p>
+    <div class="hr hr-12 dotted hr-single"></div>
+    <p>
+      <span class="sp-board-id">
+        <%= link_to '<i class="ace-icon fa fa-comment blue"></i>'.html_safe, '',
+                    'data-rel' => 'tooltip',
+                    'data-placement' => 'top',
+                    'title' => '메세지보내기' %> <%= @board.user.name %>
+      </span>
+      <span class="sp-board-email">
+        <%= link_to '<i class="ace-icon fa fa-envelope purple"></i>'.html_safe, '',
+                    'data-rel' => 'tooltip',
+                    'data-placement' => 'top',
+                    'title' => '이메일보내기' %> <%= @board.user.email %>
+      </span>
+      <div class="hr hr-12 dotted hr-single"></div>
+      <% if @board.data_file_name != nil %>
+        <div> 
+        <%= link_to '<i class="ace-icon fa fa-download pink"></i>'.html_safe, 
+                      download_notice_path(current_project, @board), 
+                      :target => "_blank", 
+                      'data-rel' => 'tooltip',
+                      'data-placement' => 'top',
+                      'title' => '다운로드'%> <%= @board.data_file_name %>
+        </div>
+        <div class="hr hr-12 dotted hr-single"></div>
+      <% end %>
+    </p>
+
+    <div class="board-frame">
+      <div class="board-body">
+        <pre>
+          <%= @board.content %>
+        </pre>
+      </div>
+    </div>
+    <div class="hr hr-12 dotted hr-single"></div>
+    <span class="text-info"> <strong> 조회수 <%= @board.count_at %> </strong> </span>
+  </div>
+  
+  
+  <div class="hr hr-12 dotted hr-double"></div>
+
+  <div class="div-bottom-btnset">
+    <%= link_to '목록보기', notices_path(current_project), :class => 'btn btn-success btn-sm' %>
+    <% if @board.user_id == current_user.id %>
+      <%= link_to '수정하기', edit_notice_path(current_project, @board), :class => 'btn btn-pink btn-sm' %>
+      <%= link_to '삭제하기', notice_path(current_project, @board), :class => 'btn btn-danger btn-sm',
+      :class => 'btn btn-danger btn-sm', 
+      :method => :delete,
+      :confirm => '삭제하시겠습니까?' %>
+    <% end %>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('[data-rel=tooltip]').tooltip({container:'body'});
+  });
+</script>
+</div>

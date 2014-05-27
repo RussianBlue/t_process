@@ -1,0 +1,183 @@
+<div class="row">
+  <div class="widget-box col-sm-8">
+    <div class="widget-header">
+      <h4 class="widget-title">메세지 보내기</h4>
+
+      <div class="widget-toolbar">
+        
+      </div>
+    </div>
+
+    <div class="widget-body">
+      <div class="widget-main">
+        <%= simple_form_for(@message, 
+          :url => {:action => 'create'},
+          :html => { 
+          :class => 'form-horizontal'
+          }) do |f| %>
+          <div class="form-group">
+            <label class="col-sm-3 control-label blue"><i class="ace-icon fa fa-comment"></i> 받는사람 </label>
+            <div class="col-sm-9">
+              <%= f.input :to,
+                          :label => false,
+                          :class => 'form-control' %>
+              <span class="m-type label label-success">SMS</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label blue"><i class="ace-icon fa fa-comment"></i> 내용 </label>
+            <div class="col-sm-9">
+              <%= f.input :content, 
+                          :label => false, 
+                          :rows => 15 %>
+            </div>
+          </div>
+          <div class="div-bottom-btnset">
+            <%= f.button  :submit, '메세지보내기', 
+                          :class         => 'btn-primary btn-sm', 
+                          :confirm       => '메세지를 보내시겠습니까?',
+                          :remote => true %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="widget-box col-sm-4">
+    <div class="widget-header">
+      <h4 class="widget-title">사용자 목록</h4>
+
+      <div class="widget-toolbar">
+        <a href="#" data-action="collapse">
+          <i class="ace-icon fa fa-chevron-down"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="widget-body">
+      <div class="widget-main">
+        <label for="form-field-mask-2">
+          직접입력
+          <small class="text-warning">ex) 01099999999</small>
+        </label>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-phone"></i>
+          </span>
+
+          <input class="form-control input-mask-phone" type="text" id="form-field-mask-2" />
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-warning" type="button" id="addPhone">
+              추가
+            </button>
+          </span>
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-danger" type="button" id="removePhone">              
+              삭제
+            </button>
+          </span>
+        </div>
+        <div class="hr hr-12 dotted hr-double"></div>
+        <label for="form-field-mask-2">
+          선택하여 보내기
+        </label>
+
+        <ul class="list-group">
+          <% @userlists.each do |userlist| %>
+            <li class="list-group-item">
+              <div class="checkbox">
+                <label>
+                  <input name="form-field-checkbox" class="ace ace-checkbox-2" type="checkbox" phone="<%= userlist.user.celp_no %>"/>
+                  <span class="lbl"> <%= userlist.user.name %> </span>
+                </label>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  //전화번호 아이템 삭제
+  function removeItem(_num){
+    var to_phone_number = $('input[name="message[to]"]').val();
+
+    if(to_phone_number.indexOf(_num) != -1){
+      var aReplace = new Array();
+
+      if(to_phone_number.indexOf(",") != -1){
+        var aTmp = to_phone_number.split(",")
+        for(i=0; i<aTmp.length; i++){
+          if(aTmp[i] != _num){
+            aReplace.push(aTmp[i]);
+          }
+        }
+        $('input[name="message[to]"]').val(aReplace.toString());
+      }else{
+        $('input[name="message[to]"]').val("");
+      }
+    }else{
+      alert("없는 번호입니다.");
+    }
+  }
+
+  //전화번호 아이템 등록
+  function addItem(_num){
+    var to_phone_number = $('input[name="message[to]"]').val();
+
+    if(to_phone_number == ""){
+      to_phone_number = _num;
+    }else{
+      if(to_phone_number.indexOf(_num) != -1){
+        alert("이미 등록된 번호입니다.")
+      }else{
+        to_phone_number += (","+_num);
+      }
+    }
+    $('input[name="message[to]"]').val(to_phone_number)
+  }
+
+  jQuery(function($){
+    //MMS, SMS 판단
+    $('textarea[name="message[text]"]').on('input',function(e){
+      var _text = $(this).val();
+      var _label = $('span.m-type');
+
+      if(_text.length > 45){
+        _label.removeClass("label-success");
+        _label.addClass("label-danger");
+        _label.text("LMS");
+      }else{
+        _label.removeClass("label-danger");
+        _label.addClass("label-success");
+        _label.text("SMS");
+      }
+    });
+
+    //버튼 클릭시에
+    $("#addPhone").click(function(event) {
+      var _num = $('#form-field-mask-2').val();
+      addItem(_num);
+    });
+
+    $("#removePhone").click(function(event) {
+      var _num = $('#form-field-mask-2').val();
+      removeItem(_num);
+    });
+
+    //체크박스 클릭시
+    $('.ace.ace-checkbox-2').click(function(event){
+      var isCheck = $(this).is(":checked");
+      var phoneNum = $(this).attr("phone");
+
+      if(isCheck){
+        addItem(phoneNum);
+      }else{
+        removeItem(phoneNum);
+      }
+    });
+  });
+</script>

@@ -12,4 +12,429 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
+/* 공통 */
+body.modal-open
+{
+	margin-right:0px;
+}
+
+div.modal-header{
+	background:#478D8D;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+div#error_explanation{
+	padding-top:0px;
+}
+
+span.top-curriculums{
+	font-size:1.3em;
+}
+
+div.control-group{
+	margin-bottom: 15px;
+}
+
+input#board_data{
+	margin-bottom: 15px;
+}
+
+ul.nav{
+	li{
+		div.tree_menu, div.m_title{
+			height:42px;
+			line-height: 42px;
+			background:#f9f9f9;
+			padding-left:12px;
+		}
+
+		div.tree_menu{
+			
+		}
+
+		div.tree_menu:hover{
+			background:#FFFFFF;
+			color:#3382af;	
+		}
+
+		div.tree_menu.active{
+			background:#FFFFFF;
+			color:#3382af;
+			font-weight: bold;
+		}
+	}
+
+	ul.nav.nav-list.tree
+	{
+		li.active{
+			div.m_title{
+				color:#FF0066;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+div.sidebar {
+    width: 250px;
+    float: left;
+    position: relative;
+    border: 1px solid #ccc;
+    border-width: 0 1px 0 0;
+    background-color: #f2f2f2
+}
+
+div.sidebar:before {
+    content: "";
+    display: block;
+    width: 250px;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-width: 0 1px 0 0
+}
+
+div.sidebar.fixed .sidebar.sidebar-fixed {
+    position: fixed;
+    z-index: 1029;
+    top: 45px;
+    left: 0
+}
+
+div.sidebar.fixed:before .sidebar.sidebar-fixed:before {
+    left: 0;
+    right: auto
+}
+
+div.main-content{
+	margin-left:250px;
+}
+
+/************************************** 게시판 읽기 **************************************/
+
+div.show_board{
+	padding:20px;
+	border: 10px solid #F4F4F4;
+
+	span.sp-board-head{
+		font-size: 1.2em;
+		color:#f67674;
+		font-weight: bold;
+	}
+
+	span.sp-board-title{
+		font-size: 1.2em;
+	}
+
+	span.sp-board-date{
+		font-size: 0.9em;
+		color:#747474;
+		float: right;
+	}
+
+	span.sp-board-id{
+		font-size: 1.1em;
+		color:#747474;
+	}
+
+	span.sp-board-email{
+		font-size: 1.1em;
+		color:#747474;
+		float: right;
+	}
+}
+
+p.form-label{
+	padding:2px;
+	
+	font-size: 1.2em;
+}
+
+div.form-margin{
+	padding:20px;
+	label.form-label{
+		padding:2px;
+		
+		font-size: 1.2em;
+	}
+
+	div.form-nomargin{
+		margin-bottom: 0px;
+	}
+}
+
+span.help-inline{
+	margin-left:5px;
+	color:#A94446;
+}
+
+span.label.label-warning{
+	font-size: 9px;
+	height:15px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+/*************************************** 게시판 읽기 끝 ***************************************/
+
+div.add-top-btn{
+	text-align:right;
+	float:right;
+}
+div.div-bottom-btnset{
+	text-align:right;
+}
+
+div.well{
+	padding-bottom:10px;
+}
+
+input.string{
+	width:100%;
+}
+
+table{
+	thead.dark-purple{
+		th{
+			color:#333366;
+		}
+	}
+	tr{
+		th{
+			text-align:center;
+		}
+		td{
+			text-align:center;
+		}
+		td.dark-blue{
+			color:#336666;
+			font-weight:bold;
+			text-align:right;
+		}
+	}
+}
+
+div.modal-dialog{
+	left:0px;
+	div.well{
+		padding:5px 10px;
+	}
+}
+
+input.messsage_input{
+	margin-top:3px;
+	margin-bottom:3px;
+}
+
+div.widget-box.col-sm-8{
+	background:#D3D3D3;
+	padding:10px;
+	margin:10px;
+}
+
+div.widget-box.col-sm-4{	
+	background:#D3D3D3;
+	padding:10px;
+
+	ul.list-group{
+		margin:0px;
+		li.list-group-item{
+			padding:0px;
+		}
+	}
+	margin:10px;
+}
+
+div#droppable{
+	width:100px;
+	height:100px;
+	background:#FFFFFF;
+}
+
+/* 공정률 */
+
+div.table.tb-process tr td{
+	text-align: center;
+}
+
+div.table.tb-process tr.tr-process-percent td{
+	background:#909090;
+	color:#FFFFFF;
+}
+
+div.table.tb-process tr td.success{
+	background: #7ac9a3;
+}
+
+div.table.tb-process tr td.processing{
+	background: #e9c148;
+}
+
+div.table.tb-process tr td.danger{
+	background: #e77d7d;
+}
+
+div.table.tb-process tr td.none{
+	background: #e5e5e5;
+}
+
+div.process-info{
+	height:20px;
+	margin-bottom:10px;
+}
+
+span.sp-process{
+	width:40px;
+	height:10px;
+	padding:5px 10px;
+	margin:0px 5px;
+	border-radius: 5px;	
+}
+
+span.sp-process.success{
+	background:#7ac9a3;
+}
+
+span.sp-process.processing{
+	background: #e9c148;
+}
+
+span.sp-process.danger{
+	background: #e77d7d;
+}
+
+span.sp-process.none{
+	background: #e5e5e5;
+}
+
+/****** 공정률 수정 *****/
+div.table.tb-process tr.tr-process-edit td{
+	padding:5px;	
+}
+
+div.table.tb-process tr.tr-process-edit td.td-lectrue-num{
+	line-height: 32px;
+}
+
+div.process-add{
+	margin-bottom:5px;
+}
+
+div.progress_type_name{
+	margin-bottom:0px;
+}
+
+a.sp-minus{
+	background:#e6c576;
+	padding:0px 5px;
+	margin-left:5px;
+	font-weight: bold;
+	border-radius: 2px;
+	color:#111111;
+}
+
+input.add_column{
+	width:320px;
+}
+/****** 공정률 수정 *****/
+
+div.table.tb-sms{
+	text-align: center;
+	td.td-sms{
+		text-align: left;
+		span.sms-btn-right{
+			float:right;
+			padding-right:10px;
+		}
+	}
+}
+
+/****** message *****/
+
+input.messsage_input{
+	margin-top:3px;
+	margin-bottom:3px;
+}
+
+div.widget-box.col-sm-7{
+	background:#D3D3D3;
+	padding:10px;
+	margin-left:10px;
+}
+
+div.widget-box.col-sm-4{	
+	background:#D3D3D3;
+	padding:10px;
+	margin-left:10px;
+
+	ul.list-group{
+		margin:0px;
+		li.list-group-item{
+			padding:0px;
+		}
+	}
+}
+
+div#droppable{
+	width:100px;
+	height:100px;
+	background:#FFFFFF;
+}
+
+/* 공정률 */
+
+
+/**** 공통 *****/
+span.sms-btn-right{
+	float:right;
+}
+h3.lec-header{
+	color:#006666;
+	font-weight:bold;
+}
+
+h4.curriculum-header{
+	color:#339966;
+}
+
+div.div-top-btnset{
+	text-align: right;
+	margin-bottom:5px;
+}
+
+h3.header.smaller.lighter.green{
+	margin-top:0px;
+	margin-bottom:10px;
+	font-weight:bold;
+}
+
+div.div-bottom-btnset{
+	text-align: right;
+	margin-bottom: 30px;
+}
+
+div.space-height-4{
+	height:30px;
+}
+
+h4.modal-title{
+	font-weight: bold;
+}
+
+span.help-inline{
+	margin-left:5px;
+	color:#A94446;
+}
+
+li.left-p-title{
+	color:#164e6e;
+	font-size:1.2em;
+	font-weight: bold;
+	padding:10px;
+}
+

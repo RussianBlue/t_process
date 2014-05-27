@@ -1,0 +1,60 @@
+<div class="page-content">
+	<%= render 'layouts/project_title' %>
+	<h3 class="header smaller lighter green">최종산출물 수정 <small> PRODUCT EDIT</small></h3>
+	<%= simple_form_for(@product, :url => {:action => 'update'}, 
+																:html => { 
+																:class => 'form-horizontal', 
+																:role => 'form', 
+																:multipart => true
+																}) do |form| %>
+		<div class="table">
+			<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th> <%= @product.lesson %> 차시</th>
+						<th>업로드</th>
+						<th>최종 업로드</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>교안</td>
+						<td>
+							<%= form.file_field	:p_data, :as => :file %>
+						</td>
+						<td>
+							<%= @product.p_data_updated_at %>
+						</td>
+					</tr>
+
+					<tr>
+						<td>스토리보드</td>
+						<td>
+							<%= form.file_field	:s_data, :as => :file %>							
+						</td>
+						<td>
+							<%= @product.s_data_updated_at %>
+						</td>
+					</tr>
+
+					<tr>
+						<td>컨텐츠</td>
+						<td class="center">
+							<%= form.check_box :content_use, {:class => 'ace'}, 1, 0 %>
+							<span class="lbl"></span>
+						</td>
+						<td>X</td>
+					</tr>
+				</tbody>
+			</table>
+		</div><!-- /.table-responsive -->
+		
+		<div class="div-bottom-btnset">
+			<%= link_to	'목록보기', curriculum_products_path(current_project, :curriculum_id => current_curriculum.id, :c_type => "products"), 
+		               :class         => 'btn btn-success btn-sm' %>
+			<%= form.button	:submit, '저장하기', 
+		     						:class         => 'btn-primary btn-sm', 
+		     						:confirm       => '저장 하시겠습니까?'%>	   		
+		</div>
+	<% end %>
+</div>

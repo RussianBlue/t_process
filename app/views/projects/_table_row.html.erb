@@ -1,0 +1,41 @@
+
+  <td><%= project.years %></td>
+  <td><%= link_to project.title, dashboard_path(project) %></td>
+  <!-- 해당 부분은 관리자만 보이게 할 부분 -->
+  <td>
+    <%= link_to '<i class="ace-icon fa fa-eye bigger-130"></i>'.html_safe,
+        project_path(project),
+        :class           => 'grey show-project',
+        'data-rel'       => 'tooltip', 
+        'data-toggle'    => "modal", 
+        'data-placement' => "bottom", 
+        'title'          => "프로젝트 상세보기",
+        "data-target"    => "#show_project_modal",
+        :remote          => true
+    %>
+  </td>  
+  <td><%= boolean_type_oxchange(project.finish) %></td>
+  <td class="center">
+    <%= link_to '<i class="ace-icon fa fa-pencil-square bigger-130"></i>'.html_safe, 
+        edit_project_path(project),
+        :class           => 'green',
+        'data-rel'       => 'tooltip', 
+        'data-toggle'    => "modal", 
+        'data-placement' => "bottom", 
+        'title'          => "수정",
+        "data-target"    => "#edit_project_modal",
+        :remote          => true
+    %>
+
+    <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
+        project, 
+        method: :delete, 
+        data: { confirm: '삭제하시겠습니까?' }, 
+        :class           => 'red',                          
+        'data-rel'       => 'tooltip', 
+        'data-toggle'    => "tooltip", 
+        'data-placement' => "bottom", 
+        'title'          => "삭제" 
+    %>
+  </td>
+<!-- 해당 부분은 관리자만 보이게 할 부분 끝-->

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  category_id: 1
+  title: MyString
+  pre_title: MyString
+  user_id: 1
+  count_at: 1
+  content: MyString
+
+two:
+  project_id: 1
+  category_id: 1
+  title: MyString
+  pre_title: MyString
+  user_id: 1
+  count_at: 1
+  content: MyString

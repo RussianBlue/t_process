@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  curriculum_id: 1
+  lesson: 1
+  process: 1
+  progress_type_id: 1
+  status: 1
+
+two:
+  project_id: 1
+  curriculum_id: 1
+  lesson: 1
+  process: 1
+  progress_type_id: 1
+  status: 1

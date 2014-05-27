@@ -1,0 +1,55 @@
+<div class="widget-box transparent">
+	<div class="widget-header widget-header-flat">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-star orange"></i>
+			<span class="title">
+				<%= @project.title %>
+			</span>
+		</h4>
+
+		<div class="widget-toolbar">
+			<a href="#" data-action="collapse">
+				<i class="ace-icon fa fa-chevron-down"></i>
+			</a>
+		</div>
+	</div>
+
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<table class="table table-bordered table-striped">
+				<thead class="thin-border-bottom">
+					
+				</thead>
+				<tbody>
+					<tr>
+						<td class="dark-blue"> 제작년도</td>
+						<td class="years"><%= @project.years %></td>
+					</tr>
+					<tr>
+						<td class="dark-blue"> 프로젝트코드</td>
+						<td class="p_code"><%= @project.p_code %></td>
+					</tr>
+						<td class="dark-blue"> 생성일</td>
+						<td class="created_at"><%= @project.created_at %></td>
+					</tr>
+					<tr>
+						<td class="dark-blue"> 종료여부</td>
+						<td class="finish"><%= boolean_type_oxchange(@project.finish) %></td>
+					</tr>
+					<tr>
+						<td class="dark-blue"> 종료일</td>
+						<td class="finished_at"><%= @project.finished_at %></td>
+					</tr>
+					<tr>
+						<td class="dark-blue"> 개발물 가로</td>
+						<td class="width"><%= @project.width %></td>
+					</tr>
+					<tr>
+						<td class="dark-blue"> 개발물 세로</td>
+						<td class="height"><%= @project.height %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div><!-- /.widget-main -->
+	</div><!-- /.widget-body -->
+</div><!-- /.widget-box -->

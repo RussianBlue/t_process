@@ -1,0 +1,49 @@
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  <h3 class="header smaller lighter green">공정률 <small> PROCESS </small></h3>
+
+  <div class="process-info">
+    <div class="pull-right">
+      <span class="sp-process success">완료</span>
+      <span class="sp-process processing">진행</span>
+      <span class="sp-process danger">지연</span>
+      <span class="sp-process none">없음</span>
+    </div>
+  </div>
+   <div class="table tb-process">
+      <table id="sample-table-1" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>차시</th>
+            <% @progress_type_all.each do |type| %>
+              <th><%= type.name %></th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="tr-process-percent">
+            <td>진행률</td>
+            <% @progress_type_all.each do |type| %>
+              <td>
+                <%= process_percent(@curriculum, type.id) %>
+              </td>
+            <% end %>
+          </tr>
+          <% (1..@curriculum.total).each do |i| %>
+            <tr class="tr-process-color">
+              <td><%= i %></td>
+              <% @progress_type_all.each do |type| %>
+                <%= content_tag(:td, '', :class => findByLesson(i, type.id.to_i)) %>
+              <% end %>
+            </tr>
+         <% end %>
+        </tbody>
+      </table>
+    </div><!-- table -->
+
+    <div class="div-bottom-btnset">
+      <%= link_to '수정하기', curriculum_progress_edit_path(current_curriculum.project, current_curriculum) , :class => 'btn btn-pink btn-sm' %>
+    </div>
+</div>

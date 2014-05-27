@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  user_id: 1
+  m_type: MyString
+  to: MyString
+  from: MyString
+  content: MyString
+
+two:
+  project_id: 1
+  user_id: 1
+  m_type: MyString
+  to: MyString
+  from: MyString
+  content: MyString

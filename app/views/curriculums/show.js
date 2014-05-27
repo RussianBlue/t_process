@@ -1,0 +1,1 @@
+$('#show_curriculum').html("<%= j render partial: 'show', locals: {curriculum: @curriculum } %>");

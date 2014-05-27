@@ -1,0 +1,78 @@
+<form method="post" name="sms" action="https://api.coolsms.co.kr/1/send" enctype="multipart/form-data" target="ifr">
+  <input type="hidden" name="api_key" value="<%= @api_key %>" />
+  <input type="hidden" name="timestamp" value="<%= @timestamp %>" />
+  <input type="hidden" name="salt" value="<%= @salt %>" /><br />
+  <input type="hidden" name="signature" value="<%= @signature %>" />
+
+  <input type="hidden" name="to" value="<%= @message.to %>" />
+  <input type="hidden" name="from" value="<%= @user.celp_no %>" />
+  <input type="hidden" name="type" value="<%= @message.m_type %>" />
+  <input type="hidden" name="subject" value="트리짓소프트웨어입니다." />  
+  <input type="hidden" name="text" value="<%= @message.content %>" />
+</form>
+
+<iframe name="ifr" width="400px" height="100px" style="display:none"> </iframe>
+
+<script type="text/javascript">
+  var form = $('form[name=sms]');
+  /*
+  $.ajaxPrefilter('json', function(options, orig, jqXHR) {
+      return 'jsonp';
+  });
+
+  $.ajax({      
+    type:"post", 
+    url:'https://api.coolsms.co.kr/1/send',
+    dataType:'text',
+    success: function( data, textStatus, jqXHR ){
+        var cData = eval( '(' + data + ')' );
+        alert(cData);
+    },   
+    error:function(e){
+        alert("BB");
+    }  
+  });
+  */
+</script>
+
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  
+  <h3 class="header smaller lighter green">SMS <small> 메세지보내기</small> </h3>
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- PAGE CONTENT BEGINS -->
+
+      <div class="error-container">
+        <div class="well">
+          <h3 class="grey lighter smaller">
+            <span class="blue bigger-125">
+              <i class="icon-comment"></i>
+            </span>
+            메세지를 전송하였습니다.
+          </h3>
+          <div>
+            <div class="space"></div>
+            <h4 class="smaller">받은사람:</h4>
+
+            <ul class="list-unstyled spaced inline bigger-110 margin-15">
+              <% @userlists.each do |user| %>
+                <li>
+                  <i class="icon-hand-right blue"></i> <%= user %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+          <hr />
+          <div class="space"></div>
+
+          <div class="center">
+            <%= link_to '<i class="icon-envelope-alt"></i>메세지 전송화면으로 돌아가기'.html_safe, new_message_path(current_project), :class => 'btn btn-primary btn-sm' %>
+          </div>
+        </div>
+      </div><!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div><!-- /.page-content -->

@@ -1,0 +1,101 @@
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  <h3 class="header smaller lighter green">최종산출물 <small> PRODUCT </small></h3>
+
+  <div class="table tb-user">  
+
+    <div id="accordion" class="accordion-style1 panel-group">
+      <!-- group -->
+      <% 1.upto(@group_count) do |group| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= group %>">
+                <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                &nbsp; <%= set_group_title(group) %>
+              </a>
+            </h4>
+          </div>
+          <div class="panel-collapse collapse <%= set_group(group) %>" id="collapse<%= group %>">
+            <div class="panel-body">
+               <div class="col-xs-6" >
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                  <thead>                      
+                  </thead>
+                  <tbody>
+                    <% set_up_to(group).upto(set_up_end(group)).each do |lessons| %>
+                      <tr>
+                        <td><%= @products[lessons].lesson %></td>
+                        <td>
+                          <%= link_to_if @products[lessons].p_data_file_name, "교안", p_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-info', :target => 'blank' do
+                              link_to "교안", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <%= link_to_if @products[lessons].s_data_file_name, "스토리보드", s_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-success', :target => 'blank' do
+                              link_to "스토리보드", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <%= link_to_if @products[lessons].content_use, "컨텐츠보기", '#', 
+                                        :onclick=>'open_window("'+contents_path(@curriculum, lessons)+'","'+@curriculum.width.to_s+'","'+@curriculum.height.to_s+'")',
+                                        :class => 'btn btn-xs btn-warning' do
+                              link_to "컨텐츠보기", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <% if current_user.authorize != "guest" %>
+                            <%= link_to '편집', edit_curriculum_product_path(current_project, @curriculum, @products[lessons]), 
+                                      :class => 'btn btn-xs btn-danger',
+                                      :target => ''
+                            %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-xs-6">
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                  <thead>                       
+                  </thead>
+                  <tbody>
+                    <% (set_up_end(group)+1).upto(set_finish(group)).each do |lessons| %>
+                      <tr>
+                        <td><%= @products[lessons].lesson %></td>
+                        <td>
+                          <%= link_to_if @products[lessons].p_data_file_name, "교안", p_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-info', :target => 'blank' do
+                              link_to "교안", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <%= link_to_if @products[lessons].s_data_file_name, "스토리보드", s_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-success', :target => 'blank' do
+                              link_to "스토리보드", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <%= link_to_if @products[lessons].content_use, "컨텐츠보기", '#', 
+                                        :onclick=>'open_window("'+contents_path(@curriculum, lessons)+'","'+@curriculum.width.to_s+'","'+@curriculum.height.to_s+'")',
+                                        :class => 'btn btn-xs btn-warning' do
+                              link_to "컨텐츠보기", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                            end
+                          %>
+                          <% if current_user.authorize != "guest" %>
+                            <%= link_to '편집', edit_curriculum_product_path(current_project, @curriculum, @products[lessons]), 
+                                      :class => 'btn btn-xs btn-danger',
+                                      :target => ''
+                            %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>      
+      <% end %>
+    </div>    
+  </div>
+</div>
+
+

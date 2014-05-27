@@ -1,0 +1,101 @@
+<div id="sidebar" class="sidebar responsive">
+  <script type="text/javascript">
+		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="nav nav-list">
+		<li class="notices">
+			<%= link_to '<i class="menu-icon fa fa-tachometer"></i><span class="menu-text"> DASHBOARD</span>'.html_safe, dashboard_path(current_project) %>
+		</li>
+		<li class="notices">
+			<%= link_to '<i class="menu-icon fa fa-comments"></i><span class="menu-text"> 공지사항</span>'.html_safe, notices_path(current_project, :category_id => 1) %>
+		</li>
+		<li class="progresses"><a href=""><i class="menu-icon fa fa-bar-chart-o"></i><span class="menu-text">공정률</span></a></li>		
+		<!-- 스켸쥴 -->
+		<li class="">
+			<a href=""><i class="menu-icon fa fa-calendar"></i><span class="menu-text">스켸쥴</span></a>
+		</li>
+		<li class="">
+			<%= link_to '<i class="menu-icon fa fa-folder-o"></i><span class="menu-text">공통문서</span>'.html_safe, notices_path(current_project, :category_id => 2) %>
+		</li>
+		<li class="">
+			<%= link_to '<i class="menu-icon fa fa-comment-o"></i><span class="menu-text">
+			SMS</span>'.html_safe, messages_path(current_project) %>
+		</li>
+		<!-- 관리자만 보여야 할 부분 -->
+		<% if current_user == "super" || current_user == "admin" %>
+			<li class="">	<%= link_to '<i class="menu-icon fa fa-leaf"></i><span class="menu-text">과정관리</span>'.html_safe, curriculums_path(current_project) %></li>
+		<% end %>
+		<!-- 관리자만 보여야 할 부분 -->
+
+		<li class="">	<%= link_to '<i class="menu-icon fa fa-leaf"></i><span class="menu-text">과정관리</span>'.html_safe, curriculums_path(current_project) %></li>
+		<!-- 내 과정목록 -->
+		<li class="my_curriculum">
+			<div class="tree_menu">
+				<span class="menu-text"><i class="icon-only ace-icon fa fa-align-justify"></i> 내 과정목록	</span>
+			</div>
+
+	    <ul class="nav nav-list tree">
+	      <!-- 좌측서브메뉴 붙일 부분 -->
+				<% user_curriculums.each do |curriculum| %>
+					<%= render partial: 'layouts/left_curriculums', locals:{curriculum:curriculum} %>
+				<% end %>
+	    </ul>
+		</li>
+		<!-- 내 과정목록 -->
+	</ul>
+
+	<%= javascript_tag do %>
+		window.category_id = "<%=j session[:category_id] %>";
+		window.curriculum_id = "<%=j session[:curriculum_id] %>";		
+	<% end %>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('[data-rel=tooltip]').tooltip({container:'body'});
+			$('.m_sub').hide();
+			
+			if(curriculum_id != ""){
+				my_curriculum_list_active();
+
+				$('li.'+curriculum_id).addClass("active");
+				$('li.'+curriculum_id).find(".m_title").find('i.fa-folder').removeClass("fa-folder").addClass("fa-folder-open")
+				$('li.'+curriculum_id).find(".m_sub").show();
+				//$('li.'+curriculum_id).find(".m_sub").find('ul').find('li.documents').addClass("active")
+			}
+
+			$('.tree_menu').click(function(e) {
+				my_curriculum_list_active();
+				$('.tree').toggle(200);
+			});
+
+			$('.m_title').click(function(event) {
+				if(!$(this).parent().hasClass("active")){
+					close();
+					$(this).parent().addClass("active");
+					$(this).find('i.fa-folder').removeClass("fa-folder").addClass("fa-folder-open")
+					$('li.active').find('.m_sub').slideDown();
+					my_curriculum_list_active();
+				}else{
+					$(this).parent().find('.m_sub').slideUp();
+					$(this).parent().removeClass("active");
+				}
+			});
+		});
+
+		function my_curriculum_list_active(){
+			if(!$('li.my_curriculum').hasClass("active")){
+				$('li.my_curriculum').addClass("active");
+				$('div.tree_menu').addClass("active");
+			}
+		}
+
+		function close(){
+			if($('li').hasClass("active")){
+				$('li').find('.m_sub').slideUp();
+				$('li').find("div.m_title").find("i.fa-folder-open").removeClass("fa-folder-open").addClass("fa-folder")
+				$('li').removeClass("active");
+			}
+		}
+	</script>
+</div>
