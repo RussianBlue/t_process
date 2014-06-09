@@ -66,3 +66,25 @@
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select').change(function(event) {
+      var val = Number($(this).find("option:selected").val());
+      $(this).parent().attr("class", "")
+      switch(val){
+        case 1:
+          $(this).parent().addClass("processing")
+        break;
+        case 2:
+          $(this).parent().addClass("danger")
+        break;
+        case 3:
+          $(this).parent().addClass("success")
+        break;
+        default :
+          $(this).parent().addClass("none")
+      }
+    });
+  });
+</script>

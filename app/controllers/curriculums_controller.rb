@@ -41,18 +41,12 @@ class CurriculumsController < ApplicationController
 
     # 과정 생성시 추가로 등록 할 사항
     @curriculum.project_id = current_project.id
+    @curriculum.progress_type_ids = '1,2,3,4,5,6,7,8,9,10'
+    @curriculum.save
 
     # 과정코드 등록
-    if Curriculum.all.count < 1
-      c_code = create_curriculum_id(1)
-    else
-      c_code = create_curriculum_id(Curriculum.all.last.id.to_i + 1)
-    end
-
-    @curriculum.progress_type_ids = '1,2,3,4,5,6,7,8,9,10'
+    c_code = create_curriculum_id(Curriculum.all.last.id.to_i)
     @curriculum.c_code = c_code
-
-    @curriculum.save
 
     total_chapter = params[:curriculum][:total].to_i
     current_id = Curriculum.all.last.id

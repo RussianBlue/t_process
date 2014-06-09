@@ -1,0 +1,63 @@
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  
+  <h3 class="header smaller lighter green">공정률 <small> Progress</small> </h3>
+
+  <div class="row">
+  	<div class="col-xs-12">
+		  	<div id="accordion" class="accordion-style1 panel-group">
+		  		<% @curriculums.each do |curriculum| %>
+			  		<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#curriculum_<%=curriculum.id%>">
+										<i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+										 <%= curriculum.title %>
+									</a>
+								</h4>
+							</div>
+
+							<div class="panel-collapse collapse" id="curriculum_<%=curriculum.id%>">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-6">
+											<% 1.upto(split_to_length(curriculum.progress_type_ids)/2.to_i) do |ids| %>
+												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_type(ids).name %>
+												<div class="progress progress progress-striped progress-small active" data-percent="<%= progress_process(curriculum, ids) %>%">
+													<div class="progress-bar" style="width:<%= progress_process(curriculum, ids) %>%;"></div>
+												</div>
+											<% end %>
+										</div>
+										<div class="col-xs-6">
+											<% (split_to_length(curriculum.progress_type_ids)/2.to_i + 1).upto(split_to_length(curriculum.progress_type_ids)) do |ids| %>
+												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_type(ids).name %>
+												<div class="progress progress progress-striped progress-small active" data-percent="<%= progress_process(curriculum, ids) %>%">
+													<div class="progress-bar" style="width:<%= progress_process(curriculum, ids) %>%;"></div>
+												</div>
+											<% end %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				</div>
+		</div>
+	</div><!-- /.row -->
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('div.progress-bar').each(function(){
+			var per = Number($(this).parent().attr("data-percent").split("%")[0])
+			if(per >= 95){
+				$(this).addClass("progress-bar-success");
+			}else if(per >= 25 && per < 95){
+				$(this).addClass("progress-bar-warning");
+			}else{
+				$(this).addClass("progress-bar-danger");
+			}
+		})
+	});
+</script>

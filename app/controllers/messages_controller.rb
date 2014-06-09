@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   def index
     @project = current_project
 
-    @messages = Message.order("id DESC").paginate(:page => params[:page], :per_page => 10)
+    @messages = current_project.messages.order("id DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /messages/1

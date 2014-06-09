@@ -28,8 +28,10 @@ class ProgressTypesController < ApplicationController
 
     progress_type_name = ProgressType.find_by_name(@progress_type.name)
 
+    logger.debug { "이름 = #{@progress_type.name} #{progress_type_name.name}" }
+
     # 기존 이름이 있을시에 해당 ID값을 가져옴
-    if progress_type_name != nil
+    if progress_type_name.name == @progress_type.name
       current_id = progress_type_name.id
     else
       @progress_type.save
@@ -60,7 +62,7 @@ class ProgressTypesController < ApplicationController
 
     respond_to do |format|
       if @progress_type.save
-        format.html { redirect_to curriculum_progresses_path(current_curriculum.project, current_curriculum), notice: '항목이 추가되었습니다.' }
+        format.html { redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum), notice: '항목이 추가되었습니다.' }
         format.json { render action: 'show', status: :created, location: @progress_type }
       else
         format.html { render action: 'new' }
@@ -74,7 +76,7 @@ class ProgressTypesController < ApplicationController
   def update
     respond_to do |format|
       if @progress_type.update(progress_type_params)
-        format.html { redirect_to curriculum_progresses_path(current_curriculum.project, current_curriculum), notice: 'Progress type was successfully updated.' }
+        format.html { redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum), notice: 'Progress type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -88,7 +90,7 @@ class ProgressTypesController < ApplicationController
   def destroy
     @progress_type.destroy
     respond_to do |format|
-      format.html { redirect_to progress_types_url }
+      format.html { redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum) }
       format.json { head :no_content }
     end
   end

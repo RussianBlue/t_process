@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.authorize == "super" && current_user.authorize == "admin"
+    if current_user.authorize == "super" || current_user.authorize == "admin"
       @projects = Project.paginate(:page => params[:page], :per_page => 10)
     else
       current_user_project = current_user.user_projects

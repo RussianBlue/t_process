@@ -13,8 +13,12 @@ module ApplicationHelper
   end
 
   def user_curriculums
-    current_user_project = current_user.user_projects.find_by_project_id(params[:project_id])
-    @curriculums = current_user_project.project.curriculums
+    if current_user.authorize == "super" || current_user.authorize == "admin"
+      @curriculums = current_project.curriculums
+    else
+      current_user_project = current_user.user_projects.find_by_project_id(params[:project_id])
+      @curriculums = current_user_project.project.curriculums
+    end
   end
 
   def boolean_type_oxchange(arg)
@@ -26,7 +30,7 @@ module ApplicationHelper
   end
 
   def current_curriculum
-    @current_curriculum ||= Curriculum.find(params[:curriculum_id])
+    @current_curriculum ||= Curriculum.find(session[:curriculum_id])
   end
 
   def new_tag(time)

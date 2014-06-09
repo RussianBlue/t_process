@@ -1,0 +1,74 @@
+<div class="page-content">
+  <div class="space-8"></div>
+  <div class="page-header">
+    <h1>
+      사용자 관리
+      <small>
+        <i class="ace-icon fa fa-hand-o-right"></i>
+        Users
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+  <div class="row">
+    <div class="col-xs-12">
+    	<form class="form-search">
+        <div class="row">
+          <div class="col-xs-8 col-sm-6">
+            <div class="input-group">
+              <input type="text" class="form-control search-query" placeholder="사용자 검색" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-purple btn-sm">
+                  검색
+                  <i class="icon-search fa fa-plus bigger-110"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="space"></div>
+
+      <!-- PAGE CONTENT BEGINS -->
+      <div class="table">
+        <table id="table" class="table table-striped table-bordered table-hover" data-role="table">
+          <thead class="dark-purple">
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>이메일</th>
+              <th>가입일</th>
+              <th>접속횟수</th>
+              <th>마지막 접속일</th>
+              <th>마지막 접속IP</th>
+              <th>회사</th>
+              <th>역할</th>
+              <th>전화번호</th>
+              <th>접근여부</th>
+              <th>권한</th>
+              <th>관리</th>
+            </tr>
+          </thead>
+
+          <tbody id="user_table">
+          	<% @users.each do |user| %>
+	            <td><%= user.id %></td>
+	            <td><%= user.name %></td>
+	            <td><%= user.email %></td>
+	            <td><%= user.created_at %></td>
+	            <td><%= user.sign_in_count %></td>
+	            <td><%= user.last_sign_in_at %></td>
+	            <td><%= user.last_sign_in_ip %></td>
+	            <td><%= user.company %></td>
+	            <td><%= user.role_type %></td>
+	            <td><%= user.celp_no %></td>
+	            <td><%= user.approval %></td>
+	            <td><%= user.authorize %></td>
+	            <td><%= link_to '<i class="ace-icon fa fa-cog green"></i></td>'.html_safe, user_edit_path(user) %>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+ </div>

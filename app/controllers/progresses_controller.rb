@@ -84,6 +84,10 @@ class ProgressesController < ApplicationController
       # 진행상황에 따른 퍼센트 계산 완료 상태일때만 100으로 계산함
       if status == 3
         progress_per = 100
+      elsif status == 2
+        progress_per = 20
+      elsif status == 1
+        progress_per = 50
       else
         progress_per = 0
       end
@@ -108,7 +112,7 @@ class ProgressesController < ApplicationController
     @progress = current_curriculum.progresses.where(:progress_type_id => progress_type_id.to_i)
 
     flash[:notice] = "해당 공정률이 삭제 되었습니다."
-    redirect_to curriculum_progresses_path(current_curriculum.project, current_curriculum)
+    redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum)
   end
 
   # POST /progresses

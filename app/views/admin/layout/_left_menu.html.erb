@@ -1,0 +1,14 @@
+<div id="sidebar" class="sidebar responsive">
+  <script type="text/javascript">
+		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="nav nav-list">
+		<li class="user">
+			<%= link_to '<i class="menu-icon fa fa-user"></i><span class="menu-text">사용자관리</span>'.html_safe, users_path %>
+		</li>
+		<li class="notices">
+			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, '' %>
+		</li>
+	</ul>
+</div>

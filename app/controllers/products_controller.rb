@@ -1,3 +1,4 @@
+
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -21,10 +22,10 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    session_create()
-
     @curriculum = Curriculum.find(params[:curriculum_id])
     @products = @curriculum.products.order('lesson ASC')
+
+    session_create()
 
     lesson_total = @curriculum.total
 

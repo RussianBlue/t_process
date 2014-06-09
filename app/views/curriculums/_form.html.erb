@@ -31,11 +31,13 @@
     <%= f.input :width, 
                 :label => false, 
                 :class => 'form-control',
+                :min => 100,
                 :placeholder => current_project.width %>
 
     <%= f.label :height, '<i class="ace-icon fa fa-chevron-right orange"></i> 세로'.html_safe, :class => 'form-label' %>
     <%= f.input :height, 
-                :label => false, 
+                :label => false,
+                :min => 100,
                 :class => 'form-control',
                 :placeholder => current_project.height %>
 

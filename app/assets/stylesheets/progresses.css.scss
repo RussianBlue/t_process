@@ -1,3 +1,137 @@
 // Place all the styles related to the progresses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+/* 공정률 */
+
+div.table.tb-process tr td{
+	text-align: center;
+}
+
+div.table.tb-process tr.tr-process-percent td{
+	background:#909090;
+	color:#FFFFFF;
+}
+
+div.table.tb-process tr td.success{
+	background: #7ac9a3;
+}
+
+div.table.tb-process tr td.processing{
+	background: #e9c148;
+}
+
+div.table.tb-process tr td.danger{
+	background: #e77d7d;
+}
+
+div.table.tb-process tr td.none{
+	background: #e5e5e5;
+}
+
+div.process-info{
+	height:20px;
+	margin-bottom:10px;
+}
+
+span.sp-process{
+	width:40px;
+	height:10px;
+	padding:5px 10px;
+	margin:0px 5px;
+	border-radius: 5px;	
+}
+
+span.sp-process.success{
+	background:#7ac9a3;
+}
+
+span.sp-process.processing{
+	background: #e9c148;
+}
+
+span.sp-process.danger{
+	background: #e77d7d;
+}
+
+span.sp-process.none{
+	background: #e5e5e5;
+}
+
+/****** 공정률 수정 *****/
+div.table.tb-process tr.tr-process-edit td{
+	padding:5px;	
+}
+
+div.table.tb-process tr.tr-process-edit td.td-lectrue-num{
+	line-height: 32px;
+}
+
+div.process-add{
+	margin-bottom:5px;
+}
+
+div.control-group.string.optional.progress_type_name{
+	margin-bottom:0px;
+}
+
+a.sp-minus{
+	background:#e6c576;
+	padding:0px 5px;
+	margin-left:5px;
+	font-weight: bold;
+	border-radius: 2px;
+	color:#111111;
+}
+
+input#progress_type_name{
+	width:350px;
+}
+/****** 공정률 수정 *****/
+
+div.table.tb-sms{
+	text-align: center;
+	td.td-sms{
+		text-align: left;
+		span.sms-btn-right{
+			float:right;
+			padding-right:10px;
+		}
+	}
+}
+
+/****** message *****/
+
+input.messsage_input{
+	margin-top:3px;
+	margin-bottom:3px;
+}
+
+div.widget-box.col-sm-7{
+	background:#D3D3D3;
+	padding:10px;
+	margin-left:10px;
+}
+
+div.widget-box.col-sm-4{	
+	background:#D3D3D3;
+	padding:10px;
+	margin-left:10px;
+
+	ul.list-group{
+		margin:0px;
+		li.list-group-item{
+			padding:0px;
+		}
+	}
+}
+
+div#droppable{
+	width:100px;
+	height:100px;
+	background:#FFFFFF;
+}
+
+/* 공정률 */

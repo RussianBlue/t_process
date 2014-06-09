@@ -46,6 +46,7 @@
       <div class="col-sm-9">
         <%= f.number_field :width, 
                   :label => false, 
+                  :min => 100,
                   :class => 'form-control' %>
       </div>
     </div>
@@ -55,7 +56,8 @@
       :class => 'col-sm-3 control-label'%>
       <div class="col-sm-9">
         <%= f.number_field :height, 
-                  :label => false, 
+                  :label => false,
+                  :min => 100,
                   :class => 'form-control' %>
       </div>
     </div>

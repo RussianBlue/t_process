@@ -3,7 +3,29 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  #before_filter { |c| Authorization.current_user = c.current_user }
+
+  include UrlHelper
+  layout 'application'
+
+  layout :layout_by_resource
+
   before_action :authenticate_user!
+
+  before_filter :current_user_approval
+
+  def current_user_approval
+    if authenticate_user! 
+      if current_user.approval == "N"
+        respond_to do |format|
+          flash[:alert] = "로그인 되었으나 해당 사용자는 승인되지 않았습니다."
+          format.html { render template: "errors/error_approval", layout: 'layouts/error', status: status }
+        end
+      else
+
+      end
+    end
+  end
 
   #rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -30,15 +52,26 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # 과정별 게시판인 경우
-    if params[:category_id].to_i >= 3 && params[:category_id].to_i <= 5
+    if params[:curriculum_id] != nil
       session.delete(:curriculum_id)
       session[:curriculum_id] = params[:curriculum_id]
     end
   end
 
+  def layout_by_resource
+    if devise_controller? && request.subdomain =~ /admin/
+      "admin"
+    else
+      if request.subdomain =~ /admin/
+        "admin"
+      else
+        "application"
+      end
+    end
+  end
+
   #rescue_from Exception, with: lambda { |exception| render_error 500, exception }
-  rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  #rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
 
   private
   def render_error(status, exception)

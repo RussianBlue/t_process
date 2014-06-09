@@ -1,2 +1,2 @@
-$('#project_table').append("<%= j render partial: 'table_row', locals: {project: @project } %>");	
+$('#project_table').append("<tr class='<%= @project.id %>'><%= j render partial: 'table_row', locals: {project: @project } %></tr>");	
 $('#new_project_modal').modal_success();
