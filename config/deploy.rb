@@ -28,6 +28,7 @@ set :repo_url, 'git@github.com:RussianBlue/t_process.git'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/trigit/t_process'
+set :linked_files, %w{config/database.yml}
 
 # Default value for :scm is :git
 # set :scm, :git
