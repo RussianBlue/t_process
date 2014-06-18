@@ -25,6 +25,9 @@ require 'capistrano/bundler'
 set :rvm_type, :user
 set :rvm_ruby_version, '2.1.0'
 
+#스테이지 설정
+Rake::Task[:production].invoke 
+
 #Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 # 
