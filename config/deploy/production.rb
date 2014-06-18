@@ -10,7 +10,6 @@ role :app, %w{trigit@14.63.218.158}
 role :web, %w{trigit@14.63.218.158}
 role :db,  %w{trigit@14.63.218.158}
 
-
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
