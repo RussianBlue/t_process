@@ -45,17 +45,18 @@
                   'data-toggle'    => 'tooltip',
                   'data-placement' => "bottom"
               %>
-
-              <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
-                  curriculum_path(current_project, curriculum), 
-                  method: :delete, 
-                  data: { confirm: '삭제하시겠습니까?' }, 
-                  :class           => 'red',                          
-                  'data-rel'       => 'tooltip', 
-                  'data-toggle'    => "tooltip", 
-                  'data-placement' => "bottom", 
-                  'title'          => "삭제" 
-              %>
+              <% if current_user.authorize =~ /super/ %>
+                <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
+                    curriculum_path(current_project, curriculum), 
+                    method: :delete, 
+                    data: { confirm: '삭제하시겠습니까?' }, 
+                    :class           => 'red',                          
+                    'data-rel'       => 'tooltip', 
+                    'data-toggle'    => "tooltip", 
+                    'data-placement' => "bottom", 
+                    'title'          => "삭제" 
+                %>
+              <% end %>
             </td>
           </tr>
         <% end %>
@@ -86,9 +87,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('[data-rel=tooltip]').tooltip({container:'body'});
-  });
-</script>

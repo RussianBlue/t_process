@@ -15,7 +15,7 @@
 		</li>
 		<!-- 스켸쥴 -->
 		<li class="">
-			<a href=""><i class="menu-icon fa fa-calendar"></i><span class="menu-text">스켸쥴</span></a>
+			<%= link_to '<i class="menu-icon fa fa-calendar"></i><span class="menu-text">스켸쥴</span>'.html_safe, calenders_path(current_project) %>
 		</li>
 		<li class="">
 			<%= link_to '<i class="menu-icon fa fa-folder-o"></i><span class="menu-text">공통문서</span>'.html_safe, notices_path(current_project, :category_id => 2) %>
@@ -25,11 +25,10 @@
 			SMS</span>'.html_safe, messages_path(current_project) %>
 		</li>
 		<!-- 관리자만 보여야 할 부분 -->
-		<% if current_user == "super" || current_user == "admin" %>
+		<% if current_user.authorize =~ /super|admin/ %>
 			<li class="">	<%= link_to '<i class="menu-icon fa fa-leaf"></i><span class="menu-text">과정관리</span>'.html_safe, curriculums_path(current_project) %></li>
 		<% end %>
 		<!-- 관리자만 보여야 할 부분 -->
-		<li class="">	<%= link_to '<i class="menu-icon fa fa-leaf"></i><span class="menu-text">과정관리</span>'.html_safe, curriculums_path(current_project) %></li>
 		<!-- 내 과정목록 -->
 		<li class="my_curriculum">
 			<div class="tree_menu">
@@ -39,10 +38,8 @@
 	    <ul class="nav nav-list tree">
 	      <!-- 좌측서브메뉴 붙일 부분 -->
 
-	      <% if user_curriculums == nil %>
-
-	      <% else %>
-		      <% user_curriculums.each do |curriculum| %>
+	      <% if user_curriculums != nil %>
+					<% user_curriculums.each do |curriculum| %>
 						<%= render partial: 'layouts/left_curriculums', locals:{curriculum:curriculum} %>
 					<% end %>
 	     	<% end %>
@@ -57,8 +54,7 @@
 	<% end %>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('[data-rel=tooltip]').tooltip({container:'body'});
+		jQuery(document).ready(function($) {
 			$('.m_sub').hide();
 			
 			if(curriculum_id != ""){

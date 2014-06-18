@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><%= content_for?(:title) ? yield(:title) : "T Process" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "T Process" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -45,12 +46,19 @@
     <!-- basic scripts -->
 
     <!-- page specific plugin scripts -->
+    
+    <script src="/ace/js/jquery-ui.custom.min.js"></script>
+    <script src="/ace/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/ace/js/markdown/markdown.min.js"></script>
+    <script src="/ace/js/markdown/bootstrap-markdown.min.js"></script>
+    <script src="/ace/js/jquery.hotkeys.min.js"></script>
+    <script src="/ace/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="/ace/js/bootbox.min.js"></script>
 
     <link rel="stylesheet" href="/common/css/font.css" />
   </head>
   <body class="no-skin">
     <%= render 'layouts/navigation' %>
-
     <% if user_signed_in? %>
       <div class="main-container" id="main-container">
         <script type="text/javascript">
@@ -75,10 +83,16 @@
     <% else %>
       <%= yield %>
     <% end %>
-
+  
     <!-- ace scripts -->
     <script src="/ace/js/ace-elements.min.js"></script>
     <script src="/ace/js/ace.min.js"></script>
-
+    
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {  
+        $('[data-rel=tooltip]').tooltip({container:'body'});
+        $('[data-rel=popover]').popover({container:'body'});   
+      });
+    </script>
   </body>
 </html>

@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   def index
     @project = current_project
 
-    @messages = current_project.messages.order("id DESC").paginate(:page => params[:page], :per_page => 10)
+    @messages = current_project.messages.where(:user_id => current_user.id).order("id DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /messages/1
@@ -45,7 +45,15 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
-    @userlists = current_project.user_projects.select(:user_id).distinct
+
+    curriculum_ids = []
+    current_project.curriculums.each do |curriculum|
+      curriculum.users.each do |user|
+        curriculum_ids.push(user)
+      end
+    end
+
+    @userlists = User.where(:id => curriculum_ids)
   end
 
   # GET /messages/1/edit
@@ -55,7 +63,14 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @userlists = current_project.user_projects.select(:user_id).distinct
+    curriculum_ids = []
+    current_project.curriculums.each do |curriculum|
+      curriculum.users.each do |user|
+        curriculum_ids.push(user)
+      end
+    end
+
+    @userlists = User.where(:id => curriculum_ids)
     @message = Message.new(message_params)
 
     @message.project_id = current_project.id
@@ -65,7 +80,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to project_message_path(current_project, @message), notice: 'Message was successfully created.' }
+        format.html { redirect_to message_path(current_project, @message), notice: '메세지를 성공적으로 전송하였습니다.' }
         format.json { render action: 'show', status: :created, location: @message }
       else
         format.html { render action: 'new' }

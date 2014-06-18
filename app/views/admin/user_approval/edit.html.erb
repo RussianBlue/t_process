@@ -1,19 +1,3 @@
-<script src="/ace/js/jquery-ui.custom.min.js"></script>
-<script src="/ace/js/jquery.ui.touch-punch.min.js"></script>
-<script src="/ace/js/chosen.jquery.min.js"></script>
-<script src="/ace/js/fuelux/fuelux.spinner.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-datepicker.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-timepicker.min.js"></script>
-<script src="/ace/js/date-time/moment.min.js"></script>
-<script src="/ace/js/date-time/daterangepicker.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
-<script src="/ace/js/bootstrap-colorpicker.min.js"></script>
-<script src="/ace/js/jquery.knob.min.js"></script>
-<script src="/ace/js/jquery.autosize.min.js"></script>
-<script src="/ace/js/jquery.inputlimiter.1.3.1.min.js"></script>
-<script src="/ace/js/jquery.maskedinput.min.js"></script>
-<script src="/ace/js/bootstrap-tag.min.js"></script>
-
 <div class="page-content">
   <div class="space-8"></div>
   <div class="page-header">
@@ -81,10 +65,7 @@
       var val = $(this).attr("id").split("remove_curriculum_")[1];
       
       $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
-    });
-  
-    $('[data-rel=tooltip]').tooltip({container:'body'});
-    $('[data-rel=popover]').popover({container:'body'});    
+    }); 
   });
 </script>
 

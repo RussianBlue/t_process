@@ -4,11 +4,47 @@
 	</script>
 
 	<ul class="nav nav-list">
-		<li class="user">
-			<%= link_to '<i class="menu-icon fa fa-user"></i><span class="menu-text">사용자관리</span>'.html_safe, users_path %>
+		<li class="user_role active">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-user"></i>
+				<span class="menu-text"> 사용자관리 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<li class=""><%= link_to '<i class="menu-icon fa fa-caret-right"></i><span class="menu-text">사용자 승인/권한 관리</span>'.html_safe, user_approval_index_path %>
+					<b class="arrow"></b>
+				</li>
+				<li class=""><%= link_to '<i class="menu-icon fa fa-caret-right"></i><span class="menu-text">사용자 과정 관리</span>'.html_safe, user_role_index_path %></li>
+			</ul>
 		</li>
-		<li class="notices">
-			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, '' %>
+		<li class="firewalls">
+			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, firewalls_path %>
 		</li>
 	</ul>
 </div>
+
+<script type="text/javascript">
+	var _loc = document.location.href
+	var _arr = ["user_role", "firewall"]
+
+	setDefault();
+
+	if(_loc.indexOf("user_role") != -1){
+		$('.user_role').addClass("active");
+	}else if(_loc.indexOf("user_approval") != -1){
+		$('.user_role').addClass("active");
+	}else if(_loc.indexOf("firewalls") != -1){
+		$('.firewalls').addClass("active");
+	}
+
+	function setDefault()
+	{
+		for(i=0; i<_arr.length; i++){
+			$("."+_arr[i]).removeClass("active");
+		}
+	}
+
+</script>

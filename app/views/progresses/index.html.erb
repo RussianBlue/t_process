@@ -42,8 +42,9 @@
         </tbody>
       </table>
     </div><!-- table -->
-
-    <div class="div-bottom-btnset">
-      <%= link_to '수정하기', curriculum_progress_edit_path(current_curriculum.project, current_curriculum) , :class => 'btn btn-pink btn-sm' %>
-    </div>
+    <% if current_user.authorize =~ /super|admin/ %>
+      <div class="div-bottom-btnset">
+        <%= link_to '수정하기', curriculum_progress_edit_path(current_curriculum.project, current_curriculum) , :class => 'btn btn-pink btn-sm' %>
+      </div>
+    <% end %>
 </div>

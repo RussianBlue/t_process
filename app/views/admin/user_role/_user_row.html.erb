@@ -1,0 +1,15 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td><%= user.created_at %></td>
+  <td><%= user.sign_in_count %></td>
+  <td><%= user.last_sign_in_at %></td>
+  <td><%= user.last_sign_in_ip %></td>
+  <td><%= user.company %></td>
+  <td><%= user.role_type %></td>
+  <td><%= user.celp_no %></td>
+  <td><%= user.approval %></td>
+  <td><%= user.authorize %></td>
+  <td><%= link_to '<i class="ace-icon fa fa-cog green"></i></td>'.html_safe, edit_user_role_path(user) %>
+</tr>

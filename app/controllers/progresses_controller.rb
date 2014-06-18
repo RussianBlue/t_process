@@ -110,6 +110,9 @@ class ProgressesController < ApplicationController
 
     # 해당 progress 데이터 삭제
     @progress = current_curriculum.progresses.where(:progress_type_id => progress_type_id.to_i)
+    @progress.each do |process|
+      process.delete
+    end
 
     flash[:notice] = "해당 공정률이 삭제 되었습니다."
     redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum)

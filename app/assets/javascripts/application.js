@@ -16,7 +16,6 @@
 //= require bootstrap
 //= require_tree .
 
-
 function open_window(_url, _width, _height) 
 {
   var openTarget = "_contents";

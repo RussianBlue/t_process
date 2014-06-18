@@ -1,0 +1,3 @@
+<% find_curriculums(project_id).each do |curriculum| %>
+  <option value="<%= curriculum.id %>"><%= curriculum.title %></option>
+<% end %>

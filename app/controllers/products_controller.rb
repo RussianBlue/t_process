@@ -1,3 +1,4 @@
+require 'uri'
 
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
@@ -6,16 +7,16 @@ class ProductsController < ApplicationController
   def p_download
     @download_file = Product.find(params[:id])
     send_file @download_file.p_data.path,
-              :filename => @download_file.p_data_file_name,
-              :content_type => @download_file.p_data_content_type,
+              :filename => enc_uri = URI.escape(@download_file.p_data_file_name),
+              :type => @download_file.p_data_content_type,
               :disposition => 'attachment'
   end
 
   def s_download
     @download_file = Product.find(params[:id])
     send_file @download_file.s_data.path,
-              :filename => @download_file.s_data_file_name,
-              :content_type => @download_file.s_data_content_type,
+              :filename => enc_uri = URI.escape(@download_file.s_data_file_name),
+              :type => @download_file.s_data_content_type,
               :disposition => 'attachment'
   end
 

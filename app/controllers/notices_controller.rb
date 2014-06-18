@@ -1,9 +1,13 @@
+require 'uri'
+
 class NoticesController < ApplicationController
+  before_action :set_notice, only: [:show, :edit, :update, :destroy]
+  
   def download
     @download_file = Board.find(params[:id])
     send_file @download_file.data.path,
-              :filename => @download_file.data_file_name,
-              :content_type => @download_file.data_content_type,
+              :filename => enc_uri = URI.escape(@download_file.data_file_name),
+              :type => @download_file.data_content_type,
               :disposition => 'attachment'
   end
 
@@ -86,6 +90,11 @@ class NoticesController < ApplicationController
   end
 
   def destroy
+    @board.destroy
+    respond_to do |format|
+      format.html { redirect_to notices_path(current_project), notice: '글이 삭제되었습니다.' }
+      format.json { head :no_content }
+    end
   end
 
   private

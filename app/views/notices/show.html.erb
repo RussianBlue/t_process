@@ -39,9 +39,7 @@
 
     <div class="board-frame">
       <div class="board-body">
-        <pre>
-          <%= @board.content %>
-        </pre>
+        <%= @board.content.html_safe %>
       </div>
     </div>
     <div class="hr hr-12 dotted hr-single"></div>
@@ -53,7 +51,7 @@
 
   <div class="div-bottom-btnset">
     <%= link_to '목록보기', notices_path(current_project), :class => 'btn btn-success btn-sm' %>
-    <% if @board.user_id == current_user.id %>
+    <% if @board.user_id == current_user.id || current_user.authorize == "super" %>
       <%= link_to '수정하기', edit_notice_path(current_project, @board), :class => 'btn btn-pink btn-sm' %>
       <%= link_to '삭제하기', notice_path(current_project, @board), :class => 'btn btn-danger btn-sm',
       :class => 'btn btn-danger btn-sm', 
@@ -61,12 +59,4 @@
       :confirm => '삭제하시겠습니까?' %>
     <% end %>
   </div>
-  
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('[data-rel=tooltip]').tooltip({container:'body'});
-  });
-</script>
 </div>

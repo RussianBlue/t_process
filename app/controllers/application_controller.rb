@@ -21,8 +21,14 @@ class ApplicationController < ActionController::Base
           flash[:alert] = "로그인 되었으나 해당 사용자는 승인되지 않았습니다."
           format.html { render template: "errors/error_approval", layout: 'layouts/error', status: status }
         end
-      else
+      end
 
+      if request.subdomain =~ /admin/ 
+        if current_user.authorize =~ /super|admin/
+          
+        else
+          redirect_to root_url(:subdomain => false)
+        end
       end
     end
   end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Remote ip:</strong>
+  <%= @firewall.remote_ip %>
+</p>
+
+<p>
+  <strong>Ip access:</strong>
+  <%= @firewall.ip_access %>
+</p>
+
+<%= link_to 'Edit', edit_firewall_path(@firewall) %> |
+<%= link_to 'Back', firewalls_path %>

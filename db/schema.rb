@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526091054) do
+ActiveRecord::Schema.define(version: 20140610004056) do
 
   create_table "board_categories", force: true do |t|
     t.integer "category_id"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 20140526091054) do
     t.integer  "curriculum_id"
   end
 
+  create_table "calenders", force: true do |t|
+    t.string   "title"
+    t.string   "type"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "curriculums", force: true do |t|
     t.integer  "project_id"
     t.integer  "total",             default: 0
@@ -45,6 +54,13 @@ ActiveRecord::Schema.define(version: 20140526091054) do
     t.string   "progress_type_ids"
     t.integer  "width"
     t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "firewalls", force: true do |t|
+    t.string   "remote_ip"
+    t.boolean  "ip_access"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,12 +132,9 @@ ActiveRecord::Schema.define(version: 20140526091054) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "user_projects", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "curriculum_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "user_curriculums", force: true do |t|
+    t.integer "user_id"
+    t.integer "curriculum_id"
   end
 
   create_table "users", force: true do |t|
@@ -143,6 +156,7 @@ ActiveRecord::Schema.define(version: 20140526091054) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "curriculum_ids"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

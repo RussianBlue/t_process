@@ -1,0 +1,61 @@
+<div class="page-content">
+  <div class="space-8"></div>
+  <div class="page-header">
+    <h1>
+      사용자 승인/권한 관리
+      <small>
+        <i class="ace-icon fa fa-hand-o-right"></i>
+        Users
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+  <div class="row">
+    <div class="col-xs-12">
+    	<%= form_tag '', :method => 'get', :id => "users_search" do %>
+        <div class="row">
+          <div class="col-sm-8 col-xs-6">
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], :class => 'form-control search-query', :placeholder => '사용자 이름 또는 이메일로 검색' %>
+              <span class="input-group-btn">
+                <%= button_tag(:type => "submit", :class => 'btn btn-purple btn-sm') do %>
+                  <i class='icon-search fa fa-plus bigger-110'></i> 검색
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="space"></div>
+      <!-- PAGE CONTENT BEGINS -->
+      <div class="table">
+        <table id="table" class="table table-striped table-bordered table-hover" data-role="table">
+          <thead class="dark-purple">
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>이메일</th>
+              <th>가입일</th>
+              <th>마지막 접속IP</th>
+              <th>회사</th>
+              <th>역할</th>
+              <th>전화번호</th>
+              <th>접근여부</th>
+              <th>권한</th>
+              <th>관리</th>
+            </tr>
+          </thead>
+
+          <tbody id="user_table">
+          	<% @users.each do |user| %>
+              <%= render partial: 'admin/user_approval/user_approval_row', locals:{:user => user} %>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+ </div>
+<script type="text/javascript">
+  
+</script>

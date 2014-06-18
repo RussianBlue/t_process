@@ -25,15 +25,17 @@ module ProductsHelper
 	end
 
 	def set_up_end(group)
-		if group == 1
-			if @group_lesson[group] > 19
-				return (@group_lesson[group] / 2) - 1
-			else
-				return (@group_lesson[group] / 2)
-			end
-		else
-			return (((group-1) * 20) + set_tables(@group_lesson[group])) - 1
-		end
+		# if group == 1
+		# 	if @group_lesson[group] > 19
+		# 		return (@group_lesson[group] / 2) - 1
+		# 	else
+		# 		return (@group_lesson[group] / 2)
+		# 	end
+		# else
+			
+		# end
+
+		return (((group-1) * 20) + set_tables(@group_lesson[group])) - 1
 	end
 
 	def set_finish(group)

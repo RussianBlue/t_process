@@ -9,7 +9,13 @@ class CurriculumsController < ApplicationController
     if current_user.authorize == "super"
       @curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)
     else
-      @curriculums = Curriculum.where(:id => current_user.user_projects, :project_id => current_project).paginate(:page => params[:page], :per_page => 10)
+      if current_user.curriculums != nil
+        curriculum_ids = []
+        current_user.curriculums.each do |curriculum|
+          curriculum_ids.push(curriculum)
+        end
+        @curriculums = Curriculum.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
+      end
     end
   end
 
@@ -125,15 +131,19 @@ class CurriculumsController < ApplicationController
       start_chapter = total_chapter + 1
 
       start_chapter.upto(remove_ids) do |i|
-        # 공정률삭제
-        progress = Progress.find_all_by_lesson(i.to_i)
+        #공정률삭제
+        progress = Progress.where(:curriculum_id => @curriculum.id, :lesson => i.to_i)
         progress.each do |process|
           process.delete
         end
 
         #최종산출물 삭제
-        product = Product.find_by_lesson(i.to_i)
-        product.delete
+        products = Product.where(:curriculum_id => @curriculum.id, :lesson => i.to_i)
+
+        logger.info { "message = #{products}"}
+        products.each do |product|
+          product.delete
+        end
       end      
     end
 
@@ -152,9 +162,16 @@ class CurriculumsController < ApplicationController
   # DELETE /curriculums/1.json
   def destroy
     1.upto(@curriculum.total) do |i|
-      progress = Progress.find_all_by_lesson(i.to_i)
+      progress = Progress.where(:curriculum_id => @curriculum.id, :lesson => i.to_i)
       progress.each do |process|
         process.delete
+      end
+
+      #최종산출물 삭제
+      products = Product.where(:curriculum_id => @curriculum.id, :lesson => i.to_i)
+      
+      products.each do |product|
+        product.delete
       end
     end
 

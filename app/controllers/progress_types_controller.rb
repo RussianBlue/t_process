@@ -26,9 +26,7 @@ class ProgressTypesController < ApplicationController
   def create
     @progress_type = ProgressType.new(progress_type_params)
 
-    progress_type_name = ProgressType.find_by_name(@progress_type.name)
-
-    logger.debug { "이름 = #{@progress_type.name} #{progress_type_name.name}" }
+    progress_type_name = ProgressType.find_by_name(@progress_type.name)    
 
     # 기존 이름이 있을시에 해당 ID값을 가져옴
     if progress_type_name.name == @progress_type.name
@@ -43,7 +41,7 @@ class ProgressTypesController < ApplicationController
     progress_type_ids.push(current_id)
     progress_type_ids_string = progress_type_ids.join(",")
     
-    #변경 된 값 update
+    #변경 된 값 Update
     current_curriculum.update_attribute(:progress_type_ids, progress_type_ids_string)
 
     # 전체 차시수
@@ -61,13 +59,8 @@ class ProgressTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @progress_type.save
-        format.html { redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum), notice: '항목이 추가되었습니다.' }
-        format.json { render action: 'show', status: :created, location: @progress_type }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @progress_type.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to curriculum_progress_edit_path(current_curriculum.project, current_curriculum), notice: '항목이 추가되었습니다.' }
+      format.json { render action: 'show', status: :created, location: @progress_type }
     end
   end
 

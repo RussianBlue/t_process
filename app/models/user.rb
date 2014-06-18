@@ -17,13 +17,15 @@ class User < ActiveRecord::Base
 	validates_format_of :celp_no, :with => /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/i, :multiline => true
 	
   belongs_to :message
-	has_many :user_projects
-  has_many :projects, :through => 'user_projects'
-  has_many :curriculums, :through => 'user_projects'
+  
+  has_many :user_curriculums
+  has_many :curriculums, :through => :user_curriculums
 
   #has_one :board
 
   ROLE_TYPES = ["트리짓", "고객사", "원고집필자", "검토자", "기타"]
+  AUTHORIZE_TYPES = ["admin", "user", "guest"]
+  SUPER_AUTHORIZE_TYPES = ["super", "admin", "user", "guest"]
   APPROVAL_TYPES = ["N", "Y"]
 
   def self.my_curriculums(u, p)
@@ -45,6 +47,14 @@ class User < ActiveRecord::Base
   end
 
   def password_salt=(new_salt)
+  end
+
+  def self.search(search)
+    if search
+      where("name LIKE ? OR email like ?", "%#{search}%", "%#{search}%")
+    else
+      scoped
+    end
   end
 
   def password=(new_password)

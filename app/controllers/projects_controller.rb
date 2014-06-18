@@ -7,11 +7,19 @@ class ProjectsController < ApplicationController
   def index
     if current_user.authorize == "super" || current_user.authorize == "admin"
       @projects = Project.paginate(:page => params[:page], :per_page => 10)
+
+      @projects = Project.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
     else
-      current_user_project = current_user.user_projects
+      current_user_project = current_user.curriculums
 
       if current_user_project != nil
-        @projects = Project.where(:id => current_user_project.select(:project_id).distinct).paginate(:page => params[:page], :per_page => 10)
+        curriculum_ids = []
+        current_user_project.each do |curriculum|
+          curriculum_ids.push(curriculum.project)
+        end
+        @projects = Project.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
+
+        @projects = Project.where(:id => curriculum_ids).search(params[:search]).paginate(:page => params[:page], :per_page => 10)
       end
     end
     
@@ -67,9 +75,8 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-
-    current_user_project = current_user.user_projects
-
+    current_user_project = current_user.user_curriculums
+    logger.info { "message #{current_user_project}" }
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to projects_url, notice: '프로젝트가 수정되었습니다.' }

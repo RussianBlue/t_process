@@ -7,11 +7,11 @@
     :role => 'form'
   }) do |f| %>
 
-  <!-- <% if @board.errors.any? %>
+  <% if @board.errors.any? %>
     <% @board.errors.full_messages.each do |message| %>
       <p> <%= message %> </p>
     <% end %>
-  <% end %>-->
+  <% end %>
   
   <div class="form-margin">
     <%= f.label :pre_title, '<i class="ace-icon fa fa-chevron-right orange"></i> 머릿말'.html_safe, :class => 'form-label' %>
@@ -39,10 +39,17 @@
     <% end %>
 
     <%= f.label :content, '<i class="fa fa-chevron-right  orange"></i> 내용'.html_safe, :class => 'form-label'%>
+    <div class="wysiwyg-editor" id="editor1"></div>
     <%= f.input :content,
-                :label => false,
-                :as => :text,
-                :input_html => {:class => 'form-control', :rows => 15} %>
+               :label => false,
+               :as => :hidden %>
+    
+    <% if @board.errors.any? %>
+      <span class="help-inline">
+        <%= @board.errors[:content][0] %>
+      </span>
+    <% end %>
+    <div class="space-4"></div>
 
     <div class="div-bottom-btnset">
       <%= link_to '목록보기', notices_path(current_project), 
@@ -53,8 +60,8 @@
                     :class         => 'btn-primary btn-sm', 
                     :confirm       => '등록 하시겠습니까?'%>
       <% else %>
-        <%= f.button  :submit, '수정하기', 
-                    :class         => 'btn-pink btn-sm', 
+        <%= f.button  :submit, '저장하기', 
+                    :class         => 'btn-primary btn-sm', 
                     :confirm       => '수정 하시겠습니까?'%>
       <% end %>
     </div>
@@ -63,6 +70,61 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function($) {
-    
-  });
+    $('input[name=commit]').click(function(event) {
+      var _html_text = $('#editor1').html();
+      $('input[name="board[content]"]').val(_html_text);
+    });
+
+    var getContent = $('input[name="board[content]"]').val();
+    if(getContent != ""){
+      $('#editor1').html(getContent);
+    }
+
+    function showErrorAlert (reason, detail) {
+      var msg='';
+      if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+      else {
+        //console.log("error uploading file", reason, detail);
+      }
+      $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+       '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+    };
+
+    $('#editor1').ace_wysiwyg({
+      toolbar:
+      [
+        'font',
+        null,
+        'fontSize',
+        null,
+        {name:'bold', className:'btn-info'},
+        {name:'italic', className:'btn-info'},
+        {name:'strikethrough', className:'btn-info'},
+        {name:'underline', className:'btn-info'},
+        null,
+        {name:'insertunorderedlist', className:'btn-success'},
+        {name:'insertorderedlist', className:'btn-success'},
+        {name:'outdent', className:'btn-purple'},
+        {name:'indent', className:'btn-purple'},
+        null,
+        {name:'justifyleft', className:'btn-primary'},
+        {name:'justifycenter', className:'btn-primary'},
+        {name:'justifyright', className:'btn-primary'},
+        {name:'justifyfull', className:'btn-inverse'},
+        null,
+        {name:'createLink', className:'btn-pink'},
+        {name:'unlink', className:'btn-pink'},
+        null,
+        {name:'insertImage', className:'btn-success'},
+        null,
+        'foreColor',
+        null,
+        {name:'undo', className:'btn-grey'},
+        {name:'redo', className:'btn-grey'}
+      ],
+      'wysiwyg': {
+        fileUploadError: showErrorAlert
+      }
+    }).prev().addClass('wysiwyg-style2');
+  })
 </script>

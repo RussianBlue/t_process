@@ -16,8 +16,7 @@ module ApplicationHelper
     if current_user.authorize == "super" || current_user.authorize == "admin"
       @curriculums = current_project.curriculums
     else
-      current_user_project = current_user.user_projects.find_by_project_id(params[:project_id])
-      @curriculums = current_user_project.project.curriculums
+      @curriculums = current_user.curriculums
     end
   end
 

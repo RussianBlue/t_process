@@ -1,5 +1,5 @@
 class ProjectProgressController < ApplicationController
-	helper_method :progress_type, :progress_process, :split_to_length
+	helper_method :progress_type, :progress_process, :split_to_length, :p_first_total, :p_second_total
 
   def index
   	session_remove()
@@ -20,7 +20,23 @@ class ProjectProgressController < ApplicationController
   end
 
   def split_to_length(str)
-  	str.split(",").map(&:to_i).length
+  	p_total = str.split(",").map(&:to_i).length
+  end
+
+  def p_first_total(total)
+    if total % 2 == 0
+      return total/2
+    else
+      return total/2 + 1
+    end
+  end
+
+  def p_second_total(total)
+    if total % 2 == 0
+      return total/2 + 1
+    else
+      return total/2 + 2
+    end
   end
 
   private

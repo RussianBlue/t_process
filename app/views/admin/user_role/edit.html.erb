@@ -1,27 +1,38 @@
 <div class="page-content">
-
-
-  <!-- page specific plugin styles -->
-  <link rel="stylesheet" href="/ace/css/jquery-ui.custom.min.css" />
-  <link rel="stylesheet" href="/ace/css/chosen.css" />
-  <link rel="stylesheet" href="/ace/css/datepicker.css" />
-  <link rel="stylesheet" href="/ace/css/bootstrap-timepicker.css" />
-  <link rel="stylesheet" href="/ace/css/daterangepicker.css" />
-  <link rel="stylesheet" href="/ace/css/bootstrap-datetimepicker.css" />
-  <link rel="stylesheet" href="/ace/css/colorpicker.css" />
-
   <div class="space-8"></div>
   <div class="page-header">
     <h1>
-      사용자 권한 수정
+      사용자 과정 관리
     </h1>
   </div><!-- /.page-header -->
-
-  <%= form_for(@user, :url => user_edit_path(@user),  :html => { :method => :put, :role => 'form'}) do |f| %>
+  
+  <%= form_for(@user, :url => {
+    :action => 'update'}, :html => { :role => 'form'}) do |f| %>
     <div class="col-xs-12 col-sm-12">
       <div class="widget-box">
         <div class="widget-body">
           <div class="widget-main">
+            <h4 class="page-header blue"><i class="ace-icon fa fa-hand-o-right purple"></i> 현재 사용자 : <%= @user.name %>, <%= @user.email %></h4>
+            <h4 class="page-header blue"><i class="ace-icon fa fa-hand-o-right purple"></i> 사용자별 프로젝트 권한설정</h4>
+            <div>
+              <i class="ace-icon fa fa-chevron-right orange"></i> <label for="form-field-select-3">프로젝트 선택하기</label>
+              <br />
+              <select class="chosen-select" id="form-field-select-3" data-placeholder="프로젝트 선택">
+                <option value="">선택해 주세요.</option>
+                <% @projects.each do |project| %>
+                  <option value="<%= project.id %>"><%= project.title %></option>
+                <% end %>
+              </select>
+            </div>
+            <div class="space-4"></div>
+            <div>
+              <i class="ace-icon fa fa-chevron-right orange"></i> <label for="form-field-select-2">과정 선택하기</label>
+              <select class="form-control" id="form-field-select-2" multiple="multiple">
+                
+              </select>
+            </div>
+
+            <div class="space-4"></div>
             <div class="">
               <h4 class="page-header blue"><i class="ace-icon fa fa-hand-o-right purple"></i> 현재 사용자 접근권한</h4>
               <table class="table table-striped table-bordered">
@@ -29,85 +40,60 @@
                   <tr>
                     <th class="center">프로젝트명</th>
                     <th class="hidden-xs">과정명</th>
+                    <th class="hidden-xs">삭제</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tbody>
-                  <% @user.user_projects.each do |u_projects| %>
-                    <tr>
-                      <td><%= u_projects.project.title %></td>
-                      <td><%= u_projects.project.title %></td>
-                    </tr>
+                  <tbody class="user_curriculums_table">
+                  <% @user.curriculums.each do |curriculum| %>
+                    <%= render partial: 'admin/user_role/curriculum_row', locals:{:curriculum => curriculum} %>
                   <% end %>
                 </tbody>
               </table>
             </div>
-            <hr />
-
-            <h4 class="page-header blue"><i class="ace-icon fa fa-hand-o-right purple"></i> 사용자별 프로젝트 권한설정</h4>
-            <div>
-              <i class="ace-icon fa fa-chevron-right orange"></i> <label for="form-field-select-3">프로젝트 선택하기</label>
-              <br />
-              <select class="chosen-select" id="form-field-select-3" data-placeholder="프로젝트 선택">
-                <% @projects.each do |project| %>
-                  <option><%= project.title %></option>
-                <% end %>
-              </select>
-            </div>
-            <div class="space-4"></div>
-            <div>
-              <i class="ace-icon fa fa-chevron-right orange"></i> <label for="form-field-select-4">과정 선택하기</label>
-              <select multiple="" class="chosen-select" id="form-field-select-4" data-placeholder="과정선택">
-                <% find_curriculums(22).each do |curriculum| %>
-                  <option><%= curriculum.title %></option>
-                <% end %>
-              </select>
+            <div class="div-bottom-btnset">
+             <%= link_to '사용자 목록보기', user_role_index_path,
+                          :class => 'btn btn-primary btn-sm' %>
             </div>
           </div>
-        </div>
-        <div class="div-bottom-btnset">
-          <%= f.submit '수정하기', :class => 'btn btn-warning btn-sm right' %>
         </div>
       </div><!-- widget-box end -->
     </div>
   <% end %>
 </div>
 
-<script src="/ace/js/jquery-ui.custom.min.js"></script>
-<script src="/ace/js/jquery.ui.touch-punch.min.js"></script>
-<script src="/ace/js/chosen.jquery.min.js"></script>
-<script src="/ace/js/fuelux/fuelux.spinner.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-datepicker.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-timepicker.min.js"></script>
-<script src="/ace/js/date-time/moment.min.js"></script>
-<script src="/ace/js/date-time/daterangepicker.min.js"></script>
-<script src="/ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
-<script src="/ace/js/bootstrap-colorpicker.min.js"></script>
-<script src="/ace/js/jquery.knob.min.js"></script>
-<script src="/ace/js/jquery.autosize.min.js"></script>
-<script src="/ace/js/jquery.inputlimiter.1.3.1.min.js"></script>
-<script src="/ace/js/jquery.maskedinput.min.js"></script>
-<script src="/ace/js/bootstrap-tag.min.js"></script>
 
 <script type="text/javascript">
-    jQuery(function($) {    
-      $('.chosen-select').chosen({allow_single_deselect:true}); 
-      //resize the chosen on window resize
-      $(window).on('resize.chosen', function() {
-        var w = $('.chosen-select').parent().width();
-        $('.chosen-select').next().css({'width':w});
-      }).trigger('resize.chosen');
-    
-      $('#chosen-multiple-style').on('click', function(e){
-        var target = $(e.target).find('input[type=radio]');
-        var which = parseInt(target.val());
-        if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-         else $('#form-field-select-4').removeClass('tag-input-style');
-      });
-    
-    
-      $('[data-rel=tooltip]').tooltip({container:'body'});
-      $('[data-rel=popover]').popover({container:'body'});    
+  jQuery(document).ready(function($) {
+    $('.chosen-select').chosen({allow_single_deselect:true}); 
+    //resize the chosen on window resize
+    $(window).on('resize.chosen', function() {
+      var w = $('.chosen-select').parent().width();
+      $('.chosen-select').next().css({'width':w});
+    }).trigger('resize.chosen');
+  
+    $('#chosen-multiple-style').on('click', function(e){
+      var target = $(e.target).find('input[type=radio]');
+      var which = parseInt(target.val());
+      if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+       else $('#form-field-select-4').removeClass('tag-input-style');
     });
-  </script>
+
+    $('#form-field-select-3').change(function(event) {
+      var val = Number($(this).find("option:selected").val());
+
+      $.ajax({ url: '/user_role/edit/select_project/'+ val });
+    });
+
+    $('.curriculum_trash').css("cursor", "pointer");
+    $('.curriculum_trash').click(function(event) {
+      var val = $(this).attr("id").split("remove_curriculum_")[1];
+      
+      $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
+    });
+  });
+</script>
+
+
+

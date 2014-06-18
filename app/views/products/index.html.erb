@@ -29,20 +29,20 @@
                         <td><%= @products[lessons].lesson %></td>
                         <td>
                           <%= link_to_if @products[lessons].p_data_file_name, "교안", p_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-info', :target => 'blank' do
-                              link_to "교안", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "교안", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
                           <%= link_to_if @products[lessons].s_data_file_name, "스토리보드", s_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-success', :target => 'blank' do
-                              link_to "스토리보드", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "스토리보드", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
                           <%= link_to_if @products[lessons].content_use, "컨텐츠보기", '#', 
                                         :onclick=>'open_window("'+contents_path(@curriculum, lessons)+'","'+@curriculum.width.to_s+'","'+@curriculum.height.to_s+'")',
                                         :class => 'btn btn-xs btn-warning' do
-                              link_to "컨텐츠보기", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "컨텐츠보기", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
-                          <% if current_user.authorize != "guest" %>
+                          <% if current_user.authorize =~ /super|admin/ %>
                             <%= link_to '편집', edit_curriculum_product_path(current_project, @curriculum, @products[lessons]), 
                                       :class => 'btn btn-xs btn-danger',
                                       :target => ''
@@ -65,20 +65,20 @@
                         <td><%= @products[lessons].lesson %></td>
                         <td>
                           <%= link_to_if @products[lessons].p_data_file_name, "교안", p_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-info', :target => 'blank' do
-                              link_to "교안", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "교안", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
                           <%= link_to_if @products[lessons].s_data_file_name, "스토리보드", s_download_curriculum_product_path(current_project, current_curriculum, @products[lessons]), :class => 'btn btn-xs btn-success', :target => 'blank' do
-                              link_to "스토리보드", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "스토리보드", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
                           <%= link_to_if @products[lessons].content_use, "컨텐츠보기", '#', 
                                         :onclick=>'open_window("'+contents_path(@curriculum, lessons)+'","'+@curriculum.width.to_s+'","'+@curriculum.height.to_s+'")',
                                         :class => 'btn btn-xs btn-warning' do
-                              link_to "컨텐츠보기", '', :class => 'btn btn-xs', :disabled => 'disabled'
+                              link_to "컨텐츠보기", '#', :class => 'btn btn-xs', :disabled => 'disabled'
                             end
                           %>
-                          <% if current_user.authorize != "guest" %>
+                          <% if current_user.authorize =~ /super|admin/ %>
                             <%= link_to '편집', edit_curriculum_product_path(current_project, @curriculum, @products[lessons]), 
                                       :class => 'btn btn-xs btn-danger',
                                       :target => ''

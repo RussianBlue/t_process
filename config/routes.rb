@@ -1,15 +1,22 @@
 TProcess::Application.routes.draw do
   scope module: 'admin', :constraints => { :subdomain => 'admin' } do
      root 'dashboard#index', :as => :admin
-     get "users/" => 'user_role#index', :as => :users
-     get "users/show/:id"  => 'user_role#show', :as => 'user_show'
-     get "users/edit/:id" => 'user_role#edit',  :as => 'user_edit'
-     put "users/update/:id" => 'user_role#update',  :as => 'user_update'
-     delete "users/destroy/:id" => 'user_role#destroy',  :as => 'user_remove'
+
+     resources :user_role
+     resources :user_approval
+     resources :firewalls
+     
+     scope '/user_role/edit/' do
+        get "select_project/:project_id" => 'user_role#select_project', :as => 'select_project'
+        get "add_curriculum/:curriculum_id" => 'user_role#add_curriculum', :as => 'add_curriculum'
+        get "remove_curriculum/:curriculum_id" => 'user_role#remove_curriculum', :as => 'remove_curriculum'
+     end
   end
 
   scope '/projects/:project_id' do
     get "project_progress" => 'project_progress#index'
+
+    resources :calenders
     resources :messages 
 
     resources :progress_types

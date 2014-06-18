@@ -1,4 +1,6 @@
 class ProjectDashboardController < ApplicationController
+	helper_method :current_curriculum_title
+
   def index
   	@project = Project.find(params[:project_id])
 
@@ -7,5 +9,9 @@ class ProjectDashboardController < ApplicationController
 
 		session.delete(:category_id)
   	session.delete(:curriculum_id)
+  end
+
+  def current_curriculum_title(arg)
+  	return Curriculum.find(arg).title
   end
 end
