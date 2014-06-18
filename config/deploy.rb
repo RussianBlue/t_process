@@ -21,13 +21,13 @@
 lock '3.2.1'
 
 set :application, 't_process'
-set :repo_url, 'wlsdl0301@github.com:RussianBlue/t_process.git'
+set :repo_url, 'git@github.com:RussianBlue/t_process.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/home/trigit/t_process'
 
 # Default value for :scm is :git
 # set :scm, :git
