@@ -62,5 +62,5 @@ TProcess::Application.routes.draw do
 
   root :to => 'projects#index'
 
-  #mount FullcalendarEngine::Engine => "/"
+  mount FullcalendarEngine::Engine => "/"
 end

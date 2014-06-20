@@ -56,6 +56,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @events = Event.find(params[:id])
     render json: { form: render_to_string(partial: 'edit_form') } 
   end
 
