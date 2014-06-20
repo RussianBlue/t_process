@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><%= content_for?(:title) ? yield(:title) : "T Process" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "T Process" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -24,6 +25,8 @@
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="/ace/css/ace-part2.min.css" />
     <![endif]-->
+    <link rel="stylesheet" href="/ace/css/jquery-ui.custom.min.css" />
+    <link rel="stylesheet" href="/ace/css/fullcalendar.css" />
     <link rel="stylesheet" href="/ace/css/ace-skins.min.css" />
     <link rel="stylesheet" href="/ace/css/ace-rtl.min.css" />
 
@@ -47,12 +50,14 @@
 
     <!-- page specific plugin scripts -->
     
+    <script src="/ace/js/jquery-ui.min.js"></script>
     <script src="/ace/js/jquery-ui.custom.min.js"></script>
     <script src="/ace/js/jquery.ui.touch-punch.min.js"></script>
     <script src="/ace/js/markdown/markdown.min.js"></script>
     <script src="/ace/js/markdown/bootstrap-markdown.min.js"></script>
     <script src="/ace/js/jquery.hotkeys.min.js"></script>
     <script src="/ace/js/bootstrap-wysiwyg.min.js"></script>
+    
     <script src="/ace/js/bootbox.min.js"></script>
 
     <link rel="stylesheet" href="/common/css/font.css" />

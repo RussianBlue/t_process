@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610004056) do
+ActiveRecord::Schema.define(version: 20140620042039) do
 
   create_table "board_categories", force: true do |t|
     t.integer "category_id"
@@ -33,15 +33,9 @@ ActiveRecord::Schema.define(version: 20140610004056) do
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
     t.integer  "curriculum_id"
-  end
-
-  create_table "calenders", force: true do |t|
-    t.string   "title"
-    t.string   "type"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "group_no"
+    t.integer  "level"
+    t.integer  "seq_no"
   end
 
   create_table "curriculums", force: true do |t|
@@ -57,6 +51,31 @@ ActiveRecord::Schema.define(version: 20140610004056) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "event_series", force: true do |t|
+    t.integer  "frequency",  default: 1
+    t.string   "period",     default: "monthly"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "all_day",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "title"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "all_day",         default: false
+    t.text     "description"
+    t.integer  "event_series_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  add_index "events", ["event_series_id"], name: "index_fullcalendar_engine_events_on_event_series_id", using: :btree
 
   create_table "firewalls", force: true do |t|
     t.string   "remote_ip"

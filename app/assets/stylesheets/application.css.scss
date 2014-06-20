@@ -12,8 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ */
+/* 공통  
 */
-/* 공통 */
 body.modal-open
 {
 	margin-right:0px;
@@ -115,7 +116,8 @@ div.main-content{
 	margin-left:250px;
 }
 
-/************************************** 게시판 읽기 **************************************/
+/************************************** 게시판 읽기 ************************************* *= require fullcalendar_engine/application
+*/
 
 div.show_board{
 	padding:20px;
@@ -159,8 +161,20 @@ div.form-margin{
 	padding:20px;
 	label.form-label{
 		padding:2px;
-		
 		font-size: 1.2em;
+	}
+
+	label.form-label.events{
+		padding:2px;
+		font-size:1em;
+		color:#333399;
+		font-weight: bold;
+	}
+
+	label.form-label.text-danger{
+		padding:2px;
+		font-size:1em;
+		font-weight: bold;
 	}
 
 	div.form-nomargin{
@@ -180,7 +194,16 @@ span.label.label-warning{
 	margin-left: 5px;
 }
 
-/*************************************** 게시판 읽기 끝 ***************************************/
+i.ace-icon.fa.fa-level-up.blue{
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg); /* IE 9  *= require fullcalendar_engine/application
+*/
+	-webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari  *= require fullcalendar_engine/application
+*/
+}
+
+/*************************************** 게시판 읽기 끝 ************************************** *= require fullcalendar_engine/application
+*/
 
 div.add-top-btn{
 	text-align:right;
@@ -198,6 +221,10 @@ input.string{
 	width:100%;
 }
 
+div.space-letter{
+	width:100px;
+}
+
 table{
 	thead.dark-purple{
 		th{
@@ -210,6 +237,9 @@ table{
 		}
 		td{
 			text-align:center;
+		}
+		td.board_title{
+			text-align: left;
 		}
 		td.dark-blue{
 			color:#336666;
@@ -257,7 +287,8 @@ div#droppable{
 }
 
 
-/**** 공통 *****/
+/**** 공통 **** *= require fullcalendar_engine/application
+*/
 input.default{
 	padding:10px;
 }
@@ -299,8 +330,11 @@ h4.modal-title{
 }
 
 span.help-inline{
-	margin-left:5px;
-	color:#A94446;
+	margin-left:10px;
+	color:#FE5A5A;
+	//background-color:#FE5A5A;
+	//padding:2px 10px;
+	font-weight:bold;
 }
 
 li.left-p-title{
@@ -312,5 +346,22 @@ li.left-p-title{
 
 div.progress{
 	margin-bottom: 10px;
+}
+
+.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix{
+	background:#0066CC;
+	color:#FFFFFF;
+	font-weight:bold;
+	text-align: center;
+
+	.ui-dialog-title{
+		line-height: 48px;
+	}
+
+	button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close
+	{
+		height:40px;
+		color:#FFFFFF;
+	}
 }
 

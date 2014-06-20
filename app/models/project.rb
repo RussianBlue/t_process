@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
 	has_many :curriculums, :through => 'user_projects'
 
 	has_many :boards
+	has_many :events
+	has_many :event_series
 
 	has_many :curriculums
 	has_many :messages

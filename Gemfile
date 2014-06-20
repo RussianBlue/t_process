@@ -21,6 +21,7 @@ gem "paperclip", '~> 4.1'
 gem 'geocoder'
 gem 'devise-encryptable'
 gem 'bootstrap-wysihtml5-rails'
+gem 'fullcalendar_engine'
 
 group :development do
   gem 'better_errors'

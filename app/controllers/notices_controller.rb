@@ -19,15 +19,11 @@ class NoticesController < ApplicationController
     @current_category = BoardCategory.find(session[:category_id].to_i)
 
     if session[:curriculum_id] != nil
-      @boards = @project.boards.order('id DESC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 10)
+      #@boards = @project.boards.order('id DESC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 10)
+      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 10)
     else
-      @boards = @project.boards.order('id DESC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 10)
-    end
-
-    if params[:page].to_i > 1 && params[:page] != nil
-      @page_num = (per_page * (params[:page].to_i - 1)) + 1
-    else 
-      @page_num = 1
+      #@boards = @project.boards.order('id DESC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 10)
+      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -42,6 +38,8 @@ class NoticesController < ApplicationController
   def new
     @board = Board.new
     @params_action = "create"
+
+    @original_board = params[:board_id]
   end
 
   def edit
@@ -61,8 +59,35 @@ class NoticesController < ApplicationController
       @board.curriculum_id = current_curriculum.id
     end
 
-    @board.user_id = current_user.id
-    
+    logger.info { "message = #{params[:board_id]}" }
+
+    if params[:board_id] != nil 
+      # 답변글에 대한 원글
+      original_board = Board.find(params[:board_id].to_i)
+
+      @board.group_no = original_board.group_no
+      @board.level = original_board.level.to_i + 1
+      @board.seq_no = original_board.seq_no.to_i + 1
+
+      update_board = @project.boards.where(:group_no => original_board.group_no)
+
+      update_board.each do |board_seq|
+        if board_seq.seq_no > 1
+          board_seq.update_attribute(:seq_no, board_seq.seq_no+1)
+        end
+      end
+    else
+      if Board.all.count < 1
+        @board.group_no = 1
+      else
+        @board.group_no = Board.all.last.id.to_i + 1
+      end
+      @board.level = 1
+      @board.seq_no = 1
+    end
+
+    @board.user_id = current_user.id    
+
     respond_to do |format|
       if @board.save
         format.html { redirect_to notice_path(current_project, @board), notice: '글이 등록되었습니다.' }
@@ -77,6 +102,7 @@ class NoticesController < ApplicationController
   def update
     @params_action = "update"
     @board = Board.find(params[:id])
+
     respond_to do |format|
       if @board.update(notice_params)
         format.html { redirect_to notice_path(current_project, @board), notice: '글이 수정되었습니다.' }

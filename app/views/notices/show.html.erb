@@ -46,11 +46,11 @@
     <span class="text-info"> <strong> 조회수 <%= @board.count_at %> </strong> </span>
   </div>
   
-  
   <div class="hr hr-12 dotted hr-double"></div>
 
   <div class="div-bottom-btnset">
     <%= link_to '목록보기', notices_path(current_project), :class => 'btn btn-success btn-sm' %>
+    <%= link_to '답글', new_notice_path(:board_id => @board), :class => 'btn btn-info btn-sm' %>
     <% if @board.user_id == current_user.id || current_user.authorize == "super" %>
       <%= link_to '수정하기', edit_notice_path(current_project, @board), :class => 'btn btn-pink btn-sm' %>
       <%= link_to '삭제하기', notice_path(current_project, @board), :class => 'btn btn-danger btn-sm',

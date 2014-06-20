@@ -1,17 +1,17 @@
 <%= simple_form_for(@board, 
   :url => {
-    :action => @params_action}, 
+    :action => @params_action, :board_id => @original_board }, 
   :html => { 
     :class => 'form-horizontal', 
     :multipart => true, 
     :role => 'form'
   }) do |f| %>
 
-  <% if @board.errors.any? %>
+  <!-- <% if @board.errors.any? %>
     <% @board.errors.full_messages.each do |message| %>
       <p> <%= message %> </p>
     <% end %>
-  <% end %>
+  <% end %> -->
   
   <div class="form-margin">
     <%= f.label :pre_title, '<i class="ace-icon fa fa-chevron-right orange"></i> 머릿말'.html_safe, :class => 'form-label' %>

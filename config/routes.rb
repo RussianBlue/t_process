@@ -16,7 +16,6 @@ TProcess::Application.routes.draw do
   scope '/projects/:project_id' do
     get "project_progress" => 'project_progress#index'
 
-    resources :calenders
     resources :messages 
 
     resources :progress_types
@@ -44,11 +43,24 @@ TProcess::Application.routes.draw do
     controller :project_dashboard do
       get "dashboard" => 'project_dashboard#index', :as => 'dashboard'
     end
+
+    #캘린더
+    resources :events do 
+      collection do 
+        get :get_events
+      end
+      member do
+        post :move
+        post :resize
+      end
+    end
   end
 
   resources :projects
 
-  devise_for :users, :controllers => { :registrations => "registrations" }  
+  devise_for :users, :controllers => { :registrations => "registrations" }    
 
   root :to => 'projects#index'
+
+  #mount FullcalendarEngine::Engine => "/"
 end

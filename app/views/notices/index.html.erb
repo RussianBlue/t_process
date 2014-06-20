@@ -20,31 +20,7 @@
 
 	    <tbody>
 	      <% @boards.each do |board| %>
-	        <tr>
-	          <td><%= @page_num %></td>
-	          <td class="center"><%= board.pre_title %></td>
-	          <td>
-	            <%= link_to board.title, notice_path(current_project, board) %>
-
-	            <% if new_tag(board.created_at) == true %>
-	              <span class="label label-warning">NEW</span>
-	            <% end %>
-	          </td>
-	          <td class="center">
-	            <% if board.data_file_name != nil %>
-	              <%= link_to '<i class="ace-icon fa fa-download pink"></i>'.html_safe, download_notice_path(current_project, board), 
-                :target => "_blank",
-                'data-rel'       => 'tooltip', 
-                'data-toggle'    => "tooltip", 
-                'data-placement' => "bottom",
-                'title' => board.data_file_name %>
-	            <% end %>
-	          </td>
-	          <td class="center"><%= board.user.name %></td>
-	          <td class="center"><%= board.created_at %></td>
-	          <td class="center"><%= board.count_at %></td>
-	        </tr>
-	        <% @page_num += 1 %>
+	        <%= render partial: 'notice_row', locals: {board: board} %>
 	      <% end %>
 	    </tbody>
 	  </table>
