@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-xs-12">
+      <%= simple_form_for(@calendar, 
+      	:url => {
+          :action => @params_action}, 
+        :html => {
+          :multipart => true, 
+          :role => 'form'
+        }) do |f| %>
+
+        <div class="form-group">
+          <%= f.label :title, "제목" %>
+          <%= f.input :title, :class => 'form-control', :label => false %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :c_data, "이미지 첨부" %>
+          <%= f.file_field :c_data,
+              :label => false,
+              :class => 'form-control', 
+              :as => :file %>
+        </div>
+
+        <% if @params_action == "update" && @calendar.c_data_file_name != nil%>
+          <dl>
+            <dt class="text-info">기존 파일 : <%= @calendar.c_data_file_name %> </dt>
+            <dd class="text-warning bigger-110 orange"> <i class="ace-icon fa fa-warning"></i> 업로드 시 기존 데이터는 삭제됩니다.</dd>
+          </dl>
+        <% end %>
+        <div class="div-bottom-btnset">
+          <%= link_to '돌아가기', calendars_path(current_project), 
+                      :class         => 'btn btn-success btn-sm' %>
+
+          <% if @params_action == "create" %>
+            <%= f.button  :submit, '저장하기', 
+                        :class         => 'btn btn-purple btn-sm', 
+                        :confirm       => '등록 하시겠습니까?' %>
+          <% else %>
+            <%= f.button  :submit, '수정하기', 
+                        :class         => 'btn-primary btn-sm btn-pink', 
+                        :confirm       => '수정 하시겠습니까?' %>
+          <% end %>
+        </div>
+
+        <span class="help-block"></span>
+      <% end %>
+    </div>
+</div>

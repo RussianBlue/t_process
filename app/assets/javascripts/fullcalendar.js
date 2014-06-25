@@ -110,8 +110,6 @@ var rtlDefaults = {
 	}
 };
 
-
-
 ;;
 
 var fc = $.fullCalendar = { version: "1.6.4" };
@@ -119,7 +117,6 @@ var fcViews = fc.views = {};
 
 
 $.fn.fullCalendar = function(options) {
-
 
 	// method calling
 	if (typeof options == 'string') {
@@ -895,7 +892,6 @@ var eventGUID = 1;
 function EventManager(options, _sources) {
 	var t = this;
 	
-	
 	// exports
 	t.isFetchNeeded = isFetchNeeded;
 	t.fetchEvents = fetchEvents;
@@ -906,13 +902,11 @@ function EventManager(options, _sources) {
 	t.removeEvents = removeEvents;
 	t.clientEvents = clientEvents;
 	t.normalizeEvent = normalizeEvent;
-	
-	
+		
 	// imports
 	var trigger = t.trigger;
 	var getView = t.getView;
 	var reportEvents = t.reportEvents;
-	
 	
 	// locals
 	var stickySource = { events: [] };
@@ -923,17 +917,12 @@ function EventManager(options, _sources) {
 	var loadingLevel = 0;
 	var cache = [];
 	
-	
 	for (var i=0; i<_sources.length; i++) {
 		_addEventSource(_sources[i]);
 	}
-	
-	
-	
+
 	/* Fetching
 	-----------------------------------------------------------------------------*/
-	
-	
 	function isFetchNeeded(start, end) {
 		return !rangeStart || start < rangeStart || end > rangeEnd;
 	}
@@ -946,6 +935,7 @@ function EventManager(options, _sources) {
 		var fetchID = ++currentFetchID;
 		var len = sources.length;
 		pendingSourceCnt = len;
+		
 		for (var i=0; i<len; i++) {
 			fetchEventSource(sources[i], fetchID);
 		}
@@ -954,9 +944,10 @@ function EventManager(options, _sources) {
 	
 	function fetchEventSource(source, fetchID) {
 		_fetchEventSource(source, function(events) {
+
+
 			if (fetchID == currentFetchID) {
 				if (events) {
-
 					if (options.eventDataTransform) {
 						events = $.map(events, options.eventDataTransform);
 					}
@@ -989,6 +980,7 @@ function EventManager(options, _sources) {
 			res = fetchers[i](source, rangeStart, rangeEnd, callback);
 			if (res === true) {
 				// the fetcher is in charge. made its own async request
+				//_fetchEventSource(res, callback);
 				return;
 			}
 			else if (typeof res == 'object') {
@@ -1077,6 +1069,7 @@ function EventManager(options, _sources) {
 
 	function addEventSource(source) {
 		source = _addEventSource(source);
+
 		if (source) {
 			pendingSourceCnt++;
 			fetchEventSource(source, currentFetchID); // will eventually call reportEvents
@@ -1089,10 +1082,12 @@ function EventManager(options, _sources) {
 			source = { events: source };
 		}
 		else if (typeof source == 'string') {
+			//alert(source +": string")
 			source = { url: source };
 		}
 		if (typeof source == 'object') {
 			normalizeSource(source);
+			//alert(source +": object")
 			sources.push(source);
 			return source;
 		}

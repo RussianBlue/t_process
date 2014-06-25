@@ -1,5 +1,9 @@
 class ProjectDashboardController < ApplicationController
-	helper_method :current_curriculum_title
+	helper_method :current_curriculum_title, :find_original
+
+  def find_original(arg)
+    board = Board.find(arg) if Board.exists?(arg)
+  end
 
   def index
   	@project = Project.find(params[:project_id])

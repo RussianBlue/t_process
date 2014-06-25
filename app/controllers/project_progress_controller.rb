@@ -1,5 +1,5 @@
 class ProjectProgressController < ApplicationController
-	helper_method :progress_type, :progress_process, :split_to_length, :p_first_total, :p_second_total
+	helper_method :progress_type, :progress_process, :split_to_length, :p_first_total, :p_second_total, :progress_process_name
 
   def index
   	session_remove()
@@ -10,13 +10,25 @@ class ProjectProgressController < ApplicationController
   	p = ProgressType.find(_id)
   end
 
+  def progress_process_name(curriculum, ids)
+    progress_ids = curriculum.progress_type_ids.split(",")
+
+    return ProgressType.find(progress_ids[ids.to_i - 1].to_i).name
+  end
+
   def progress_process(curriculum, ids)
   	total = curriculum.total
-  	process = 0
+  	process_per = 0
+
+    progress_ids = curriculum.progress_type_ids.split(",")
+
   	1.upto(total) do |i|
-  		process += curriculum.progresses.find_by_lesson_and_progress_type_id(i, ids).process.to_i
+      curriculum.progresses.where(:lesson => i, :progress_type_id => progress_ids[ids.to_i - 1].to_i).each do |pp|
+        process_per += pp.process
+      end
   	end
-  	return process / total
+
+  	return process_per / total
   end
 
   def split_to_length(str)

@@ -76,7 +76,11 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     current_user_project = current_user.user_curriculums
-    logger.info { "message #{current_user_project}" }
+    
+    if params[:project][:finish] == "true"
+      @project.update_attribute(:finished_at, Time.now)
+    end
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to projects_url, notice: '프로젝트가 수정되었습니다.' }

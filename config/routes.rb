@@ -15,10 +15,12 @@ TProcess::Application.routes.draw do
 
   scope '/projects/:project_id' do
     get "project_progress" => 'project_progress#index'
-
+    #메세지
     resources :messages 
-
+    #
     resources :progress_types
+    #달력
+    resources :calendars
     
     resources :curriculums do
       resources :progresses
@@ -44,16 +46,16 @@ TProcess::Application.routes.draw do
       get "dashboard" => 'project_dashboard#index', :as => 'dashboard'
     end
 
-    #캘린더
-    resources :events do 
-      collection do 
-        get :get_events
-      end
-      member do
-        post :move
-        post :resize
-      end
-    end
+    # #캘린더
+    # resources :events do 
+    #   collection do 
+    #     get :get_events
+    #   end
+    #   member do
+    #     post :move
+    #     post :resize
+    #   end
+    # end
   end
 
   resources :projects
@@ -61,6 +63,4 @@ TProcess::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }    
 
   root :to => 'projects#index'
-
-  mount FullcalendarEngine::Engine => "/"
 end

@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
 //= require_tree .
-//= application
 
 function open_window(_url, _width, _height) 
 {

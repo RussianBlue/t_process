@@ -2,6 +2,7 @@ require 'uri'
 
 class NoticesController < ApplicationController
   before_action :set_notice, only: [:show, :edit, :update, :destroy]
+  helper_method :find_original
   
   def download
     @download_file = Board.find(params[:id])
@@ -59,11 +60,13 @@ class NoticesController < ApplicationController
       @board.curriculum_id = current_curriculum.id
     end
 
-    logger.info { "message = #{params[:board_id]}" }
-
     if params[:board_id] != nil 
+      session[:board_id] = params[:board_id]
+    end
+
+    if session[:board_id] != nil 
       # 답변글에 대한 원글
-      original_board = Board.find(params[:board_id].to_i)
+      original_board = Board.find(session[:board_id].to_i)
 
       @board.group_no = original_board.group_no
       @board.level = original_board.level.to_i + 1
@@ -90,6 +93,7 @@ class NoticesController < ApplicationController
 
     respond_to do |format|
       if @board.save
+        session.delete(:board_id)
         format.html { redirect_to notice_path(current_project, @board), notice: '글이 등록되었습니다.' }
         format.json { render action: 'create', status: :created, location: @board }
       else
@@ -121,6 +125,10 @@ class NoticesController < ApplicationController
       format.html { redirect_to notices_path(current_project), notice: '글이 삭제되었습니다.' }
       format.json { head :no_content }
     end
+  end
+
+  def find_original(arg)
+    board = Board.find(arg) if Board.exists?(arg)
   end
 
   private

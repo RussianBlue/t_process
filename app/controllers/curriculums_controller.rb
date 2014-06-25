@@ -139,8 +139,7 @@ class CurriculumsController < ApplicationController
 
         #최종산출물 삭제
         products = Product.where(:curriculum_id => @curriculum.id, :lesson => i.to_i)
-
-        logger.info { "message = #{products}"}
+        
         products.each do |product|
           product.delete
         end

@@ -10,7 +10,10 @@ class Curriculum < ActiveRecord::Base
 
 	validates_presence_of :total, :on => :create, :message => "총 차시수를 입력해 주세요."
 	validates_presence_of :title, :on => :create, :message => "과정명을 입력해 주세요."
-
+	validates_uniqueness_of :title, :on => :create, :message => "이미 있는 과정입니다."
+	validates_presence_of :location, :message => "공통 경로를 입력해 주세요."
+	validates_presence_of :start, :message => "시작파일명을 입력해 주세요."
+	
 	validates_uniqueness_of :title, :on => :create, :message => "같은 이름의 과정명이 있습니다."
 	validate :total, :length => { :maximum => 3 }
 

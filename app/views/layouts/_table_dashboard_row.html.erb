@@ -7,10 +7,25 @@
   </td>
   <td class="center"><%= current_dashboard_category(board.category_id) %></td>
   <td class="center"><%= board.pre_title %></td>
-  <td>
-    <%= link_to board.title, notice_path(current_project, board, :category_id => board.category_id, :curriculum_id => board.curriculum_id) %>
-    <% if new_tag(board.created_at) == true %>
-      <span class="label label-warning">NEW</span>
+  <td class="board_title" style="padding-left:<%= board.level.to_i * 20%>px;">
+    <% if board.level != 1 %>
+      <i class="ace-icon fa fa-level-up blue"></i>
+      <% if find_original(board.group_no) != nil%>
+        <span class="text-warning"> [원글] <%= find_original(board.group_no).title %></span>
+        <span class="text-danger"> [답글]</span>
+      <% else %>
+        <span class="text-danger"> [삭제된 게시물에 대한 답변입니다.]</span>
+      <% end %>
+        <%= link_to board.title, notice_path(current_project, board, :category_id => board.category_id, :curriculum_id => board.curriculum_id) %>
+        <% if new_tag(board.created_at) == true %>
+          <span class="label label-warning">NEW</span>
+        <% end %>
+    <% else %>
+      <%= link_to board.title, notice_path(current_project, board) %>
+
+      <% if new_tag(board.created_at) == true %>
+        <span class="label label-warning">NEW</span>
+      <% end %>
     <% end %>
   </td>
   <td class="center"><%= board.user.name %></td>

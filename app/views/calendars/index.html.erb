@@ -1,0 +1,69 @@
+<div class="page-content">
+  <%= render 'layouts/project_title' %>
+  <div class="space-12"></div>
+  
+  <h3 class="header smaller lighter green">스켸쥴 <small> Schedule</small> </h3>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="ace-thumbnails clearfix">
+      <% @calendars.each do |calendar| %>
+        <li class="">
+            <% if current_user.authorize =~ /super|admin/ %>
+              <div class="tools">
+                <%= link_to '<i class="ace-icon fa fa-edit orange"></i>'.html_safe, edit_calendar_path(current_project, calendar) %>
+                <%= link_to '<i class="ace-icon fa fa-trash-o"></i>'.html_safe, calendar_path(current_project, calendar), method: :delete, 
+                        data: { confirm: '삭제하시겠습니까?' } %>
+              </div>
+
+            <% end %>
+
+            <a href="<%= calendar.c_data.url %>", data-rel="colorbox">
+              <%= image_tag calendar.c_data.url(:medium) %>
+            </a>
+
+            <div class="img-title center">
+              <span class="text-danger"><i class="ace-icon fa fa-file-o"></i> <%= calendar.title %></span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <% if current_user.authorize =~ /super|admin/ %>
+      <div class="div-bottom-btnset">
+        <%= link_to "스케쥴 등록하기", new_calendar_path(current_project), :class => 'btn btn-sm btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    var $overflow = '';
+    var colorbox_params = {
+      rel: 'colorbox',
+      reposition:true,
+      scalePhotos:true,
+      scrolling:false,
+      previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+      next:'<i class="ace-icon fa fa-arrow-right"></i>',
+      close:'&times;',
+      current:'{current} of {total}',
+      maxWidth:'100%',
+      maxHeight:'100%',
+      onOpen:function(){
+        $overflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+      },
+      onClosed:function(){
+        document.body.style.overflow = $overflow;
+      },
+      onComplete:function(){
+        $.colorbox.resize();
+      }
+    };
+
+    $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+    $("#cboxLoadingGraphic").append("<i class='ace-icon fa fa-spinner orange'></i>");//let's add a custom loading icon
+  });
+</script>

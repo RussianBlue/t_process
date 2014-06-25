@@ -23,7 +23,7 @@
 									<div class="row">
 										<div class="col-xs-6">
 											<% 1.upto(p_first_total(split_to_length(curriculum.progress_type_ids))) do |ids| %>
-												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_type(ids).name %>
+												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_process_name(curriculum, ids) %>
 												<div class="progress progress progress-striped progress-small active" data-percent="<%= progress_process(curriculum, ids) %>%">
 													<div class="progress-bar" style="width:<%= progress_process(curriculum, ids) %>%;"></div>
 												</div>
@@ -31,7 +31,7 @@
 										</div>
 										<div class="col-xs-6">
 											<% (p_second_total(split_to_length(curriculum.progress_type_ids))).upto(split_to_length(curriculum.progress_type_ids)) do |ids| %>
-												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_type(ids).name %>
+												<i class="ace-icon fa fa-check bigger-90 blue"></i> <%= progress_process_name(curriculum, ids) %>
 												<div class="progress progress progress-striped progress-small active" data-percent="<%= progress_process(curriculum, ids) %>%">
 													<div class="progress-bar" style="width:<%= progress_process(curriculum, ids) %>%;"></div>
 												</div>

@@ -29,11 +29,11 @@ class ProgressTypesController < ApplicationController
     progress_type_name = ProgressType.find_by_name(@progress_type.name)    
 
     # 기존 이름이 있을시에 해당 ID값을 가져옴
-    if progress_type_name.name == @progress_type.name
-      current_id = progress_type_name.id
-    else
+    if progress_type_name == nil
       @progress_type.save
       current_id = @progress_type.id
+    else
+      current_id = progress_type_name.id
     end    
 
     # Curriculum 의 progress_type_ids 변경

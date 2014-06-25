@@ -9,10 +9,10 @@ en:
     failure:
       already_authenticated: "이미 로그인 되어 있습니다."
       inactive: "Your account is not activated yet."
-      invalid: "아이디와 비번을 확인해 주세요."
+      invalid: "아이디와 비밀번호를 확인해 주세요."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account will be locked."
-      not_found_in_database: "아이디와 비번을 확인해 주세요."
+      not_found_in_database: "아이디와 비밀번호를 확인해 주세요."
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "로그인이 필요합니다."
       unconfirmed: "You have to confirm your account before continuing."

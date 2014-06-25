@@ -20,6 +20,16 @@ body.modal-open
 	margin-right:0px;
 }
 
+a:hover
+{
+	background:none;
+}
+
+div.img-title.center{
+	font-size:1.1em;
+	padding:5px;
+}
+
 div.modal-header{
 	background:#478D8D;
 	color:#FFFFFF;
@@ -116,7 +126,7 @@ div.main-content{
 	margin-left:250px;
 }
 
-/************************************** 게시판 읽기 ************************************* *= require fullcalendar_engine/application
+/************************************** 게시판 읽기 ************************************* 
 */
 
 div.show_board{
@@ -196,13 +206,13 @@ span.label.label-warning{
 
 i.ace-icon.fa.fa-level-up.blue{
 	transform:rotate(90deg);
-	-ms-transform:rotate(90deg); /* IE 9  *= require fullcalendar_engine/application
+	-ms-transform:rotate(90deg); /* IE 9  
 */
-	-webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari  *= require fullcalendar_engine/application
+	-webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari  
 */
 }
 
-/*************************************** 게시판 읽기 끝 ************************************** *= require fullcalendar_engine/application
+/*************************************** 게시판 읽기 끝 ************************************** 
 */
 
 div.add-top-btn{
@@ -287,8 +297,6 @@ div#droppable{
 }
 
 
-/**** 공통 **** *= require fullcalendar_engine/application
-*/
 input.default{
 	padding:10px;
 }

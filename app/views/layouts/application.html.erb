@@ -11,7 +11,8 @@
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="/ace/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-  
+    
+    <link rel="stylesheet" href="/ace/css/colorbox.css" />
     <!-- text fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
@@ -26,10 +27,10 @@
       <link rel="stylesheet" href="/ace/css/ace-part2.min.css" />
     <![endif]-->
     <link rel="stylesheet" href="/ace/css/jquery-ui.custom.min.css" />
-    <link rel="stylesheet" href="/ace/css/fullcalendar.css" />
+    <!-- <link rel="stylesheet" href="/ace/css/fullcalendar.css" /> -->
     <link rel="stylesheet" href="/ace/css/ace-skins.min.css" />
     <link rel="stylesheet" href="/ace/css/ace-rtl.min.css" />
-
+    
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="/ace/css/ace-ie.min.css" />
     <![endif]-->
@@ -48,9 +49,8 @@
     
     <!-- basic scripts -->
 
-    <!-- page specific plugin scripts -->
+    <!-- page specific plugin scripts -->    
     
-    <script src="/ace/js/jquery-ui.min.js"></script>
     <script src="/ace/js/jquery-ui.custom.min.js"></script>
     <script src="/ace/js/jquery.ui.touch-punch.min.js"></script>
     <script src="/ace/js/markdown/markdown.min.js"></script>
@@ -59,6 +59,7 @@
     <script src="/ace/js/bootstrap-wysiwyg.min.js"></script>
     
     <script src="/ace/js/bootbox.min.js"></script>
+    <script src="/ace/js/jquery.colorbox-min.js"></script>
 
     <link rel="stylesheet" href="/common/css/font.css" />
   </head>
@@ -96,7 +97,8 @@
     <script type="text/javascript">
       jQuery(document).ready(function($) {  
         $('[data-rel=tooltip]').tooltip({container:'body'});
-        $('[data-rel=popover]').popover({container:'body'});   
+        $('[data-rel=popover]').popover({container:'body'}); 
+
       });
     </script>
   </body>

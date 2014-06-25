@@ -9,11 +9,12 @@
       <div class"add-top-btn">
         <%= link_to '새로운 이벤트 생성', 'javascript:void()', id: 'new_event', :class => 'btn btn-sm btn-primary' %>
       </div>
+     
       <div class="space-4"></div>
       <div>
         <div class='calendar'></div>
       </div>
-      
+
       <div id="event_desc_dialog" class="dialog" style="display:none;">
         
       </div>
@@ -40,6 +41,19 @@
 <script>
   $(document).ready(function(){
     $('.calendar').fullCalendar(full_calendar_options);
+    //
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
+    
+    // $('.calendar').fullCalendar({
+    //   events: {
+    //     url: "/projects/1/events/get_events?start="+d+"&end=1403967600&_=1403499381543"
+    //   }
+    // });
+
     // page is now ready, initialize the calendar...
     $('#new_event').click(function(event) {
       FullcalendarEngine.Form.display()

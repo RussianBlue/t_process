@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  layout FullcalendarEngine::Configuration['layout'] || 'application'
+  #layout FullcalendarEngine::Configuration['layout'] || 'application'
 
   before_filter :load_event, only: [:edit, :update, :destroy, :move, :resize]
   before_filter :determine_event_type, only: :create
@@ -25,6 +25,7 @@ class EventsController < ApplicationController
                           start_time: Time.at(params['start'].to_i).to_formatted_s(:db),
                           end_time:   Time.at(params['end'].to_i).to_formatted_s(:db))
     events = []
+
     @events.each do |event|
       events << { id: event.id,
                   title: event.title,
