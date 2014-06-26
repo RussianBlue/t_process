@@ -31,19 +31,15 @@
     <%= f.input :width, 
                 :label => false, 
                 :class => 'form-control',
-                :min => 100,
-                :placeholder => current_project.width %>
+                :min => 100 %>
 
     <%= f.label :height, '<i class="ace-icon fa fa-chevron-right orange"></i> 세로'.html_safe, :class => 'form-label' %>
     <%= f.input :height, 
                 :label => false,
                 :min => 100,
-                :class => 'form-control',
-                :placeholder => current_project.height %>
+                :class => 'form-control' %>
 
     <div class="div-bottom-btnset">
-      <%= link_to '목록보기', curriculums_path(current_project), 
-                  :class         => 'btn btn-success btn-sm' %>
       <% if @params_action == 'create' %>
         <%= f.button  :submit, '저장하기', 
                       :class         => 'btn-primary btn-sm', 
@@ -53,6 +49,8 @@
                       :class         => 'btn-pink btn-sm', 
                       :confirm       => '수정 하시겠습니까?'%>
       <% end %>
+      <%= link_to '목록보기', curriculums_path(current_project), 
+                  :class         => 'btn btn-success btn-sm' %>
     </div>
   </div>
 <% end %>

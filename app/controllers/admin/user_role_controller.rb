@@ -37,6 +37,8 @@ class Admin::UserRoleController < ApplicationController
 
   def add_curriculum
     @user_curriculum = UserCurriculum.find_by_user_id_and_curriculum_id(session[:role_user].to_i, params[:curriculum_id])
+
+    logger.info { "message == #{ @user_curriculum }" }
     @saved = false
 
     if @user_curriculum == nil
@@ -66,12 +68,11 @@ class Admin::UserRoleController < ApplicationController
 
     @curriculum = Curriculum.find(params[:curriculum_id])
     
-    respond_to do |format|
-      format.js {render :layout => false}
-    end
+    @user_curriculum.destroy
 
-    @user_curriculum.delete
-    flash[:notice] = "해당 과정이 삭제되었습니다."
+    respond_to do |format|
+      format.html { redirect_to edit_user_role_path(params[:curriculum_id]), notice: '해당 과정이 삭제되었습니다.' }
+    end
   end
 
   def find_by_user_curriculum(user, curriculum_id)

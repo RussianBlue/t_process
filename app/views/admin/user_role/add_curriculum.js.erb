@@ -4,9 +4,9 @@
 	$('.user_curriculums_table').append("<%=j render partial: 'admin/user_role/curriculum_row', locals:{:curriculum => @curriculum } %>")
 
 	$('.curriculum_trash').css("cursor", "pointer");
-	$('.curriculum_trash').click(function(event) {
-	  var val = $(this).attr("id").split("remove_curriculum_")[1];
-
-	  $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
-	});
+  $('.curriculum_trash').click(function(event) {
+    var val = $(this).attr("id").split("remove_curriculum_")[1];
+    
+    $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
+  });
 <% end %>

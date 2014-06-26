@@ -85,13 +85,6 @@
 
       $.ajax({ url: '/user_role/edit/select_project/'+ val });
     });
-
-    $('.curriculum_trash').css("cursor", "pointer");
-    $('.curriculum_trash').click(function(event) {
-      var val = $(this).attr("id").split("remove_curriculum_")[1];
-      
-      $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
-    });
   });
 </script>
 
