@@ -48,6 +48,8 @@ class Admin::UserRoleController < ApplicationController
 
       @curriculum = Curriculum.find(params[:curriculum_id])
       @saved = true
+
+      flash[:notice] = "해당 과정이 등록되었습니다."
     end
 
     respond_to do |format|
@@ -61,13 +63,15 @@ class Admin::UserRoleController < ApplicationController
 
   def remove_curriculum
     @user_curriculum = UserCurriculum.find_by_user_id_and_curriculum_id(session[:role_user].to_i, params[:curriculum_id])
-    @curriculum = Curriculum.find(params[:curriculum_id])
 
+    @curriculum = Curriculum.find(params[:curriculum_id])
+    
     respond_to do |format|
       format.js {render :layout => false}
     end
 
-    @user_curriculum.destroy
+    @user_curriculum.delete
+    flash[:notice] = "해당 과정이 삭제되었습니다."
   end
 
   def find_by_user_curriculum(user, curriculum_id)

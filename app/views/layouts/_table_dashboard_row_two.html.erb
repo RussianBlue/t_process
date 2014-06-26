@@ -1,6 +1,9 @@
 <tr>
   <td class="center">
-    <%= board.id %>
+    <% if board.curriculum_id != nil %>
+      <span data-rel="tooltip" data-placement="bottom" title="<%= current_curriculum_title(board.curriculum_id) %>">
+        <%= truncate(current_curriculum_title(board.curriculum_id).to_s, :length => 18) %></span>
+    <% end %>
   </td>
   <td class="center"><%= current_dashboard_category(board.category_id) %></td>
   <td class="center"><%= board.pre_title %></td>
