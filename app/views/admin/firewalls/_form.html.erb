@@ -1,12 +1,18 @@
 <%= simple_form_for(@firewall) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :remote_ip %>
-    <%= f.input :ip_access %>
+  <div class="form-group">
+  	<%= f.label :remote_ip, "등록할 IP주소"%>
+    <%= f.input :remote_ip, :label => false, :class => 'form-control' %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+  	<%= f.label :ip_access, "아이피 허용 여부"%>
+  	<%= f.input :ip_access, :label => false, :class => 'form-control' %>
   </div>
+	
+	<div class="div-bottom-btnset">
+	 <%= link_to '목록보기', firewalls_path, :class => 'btn btn-primary btn-sm' %>
+	 <%= f.button :submit, "등록하기", :class => 'btn btn-sm btn-success' %>
+	</div>
 <% end %>

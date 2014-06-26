@@ -37,37 +37,3 @@
     </div>
   <% end %>
 </div>
-
-<script type="text/javascript">
-  jQuery(function($) {    
-    $('.chosen-select').chosen({allow_single_deselect:true}); 
-    //resize the chosen on window resize
-    $(window).on('resize.chosen', function() {
-      var w = $('.chosen-select').parent().width();
-      $('.chosen-select').next().css({'width':w});
-    }).trigger('resize.chosen');
-  
-    $('#chosen-multiple-style').on('click', function(e){
-      var target = $(e.target).find('input[type=radio]');
-      var which = parseInt(target.val());
-      if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-       else $('#form-field-select-4').removeClass('tag-input-style');
-    });
-
-    $('#form-field-select-3').change(function(event) {
-      var val = Number($(this).find("option:selected").val());
-
-      $.ajax({ url: '/user_role/edit/select_project/'+ val });
-    });
-
-    $('.curriculum_trash').css("cursor", "pointer");
-    $('.curriculum_trash').click(function(event) {
-      var val = $(this).attr("id").split("remove_curriculum_")[1];
-      
-      $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
-    }); 
-  });
-</script>
-
-
-

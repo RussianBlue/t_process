@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   before_action :authenticate_user!
-
   before_filter :current_user_approval
 
   def current_user_approval
@@ -25,9 +24,13 @@ class ApplicationController < ActionController::Base
 
       if request.subdomain =~ /admin/ 
         if current_user.authorize =~ /super|admin/
+          firewall = Firewall.find_by_remote_ip(current_user.current_sign_in_ip) if Firewall.exists?
           
+          if firewall.ip_access == false
+            render :text => '접속권한 없음', status: :bad_request
+          end
         else
-          redirect_to root_url(:subdomain => false)
+          redirect_to root_url(:subdomain => false) 
         end
       end
     end
@@ -77,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
 
   #rescue_from Exception, with: lambda { |exception| render_error 500, exception }
-  #rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
 
   private
   def render_error(status, exception)
