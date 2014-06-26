@@ -27,7 +27,7 @@
             <div class="space-4"></div>
             <div>
               <i class="ace-icon fa fa-chevron-right orange"></i> <label for="form-field-select-2">과정 선택하기</label>
-              <select class="form-control" id="form-field-select-2" multiple="multiple">
+              <select class="form-control aa" id="form-field-select-2" multiple="multiple">
                 
               </select>
             </div>
@@ -84,6 +84,13 @@
       var val = Number($(this).find("option:selected").val());
 
       $.ajax({ url: '/user_role/edit/select_project/'+ val });
+    });
+
+    $('.curriculum_trash').css("cursor", "pointer");
+    $('.curriculum_trash').click(function(event) {
+      var val = $(this).attr("id").split("remove_curriculum_")[1];
+      
+      $.ajax({ url: '/user_role/edit/remove_curriculum/'+ val });
     });
   });
 </script>

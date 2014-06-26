@@ -1,3 +1,23 @@
 <% find_curriculums(project_id).each do |curriculum| %>
   <option value="<%= curriculum.id %>"><%= curriculum.title %></option>
 <% end %>
+<script type="text/javascript">
+	$('.aa').unbind("dblclick");
+
+	$(".aa").dblclick(function(event){
+	  var selectBoxValue = $(".aa option:selected").val();
+	  
+	  $.ajax({ 
+      url: '/user_role/edit/add_curriculum/'+ selectBoxValue,
+      success:function(data){
+        
+        if(data.indexOf("append") == -1){
+          alert("이미 등록된 과정입니다.")
+        }
+      },
+      error:function(request, status){
+        
+      }
+    });
+	});
+</script>

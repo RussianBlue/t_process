@@ -2,6 +2,6 @@
   <td><%= curriculum.title %></td>
   <td><%= curriculum.project.title %></td>
   <td class="red">
-  	<%= link_to '<i class="ace-icon fa fa-trash-o bigger-130 curriculum_trash"></i>'.html_safe, remove_curriculum_path(curriculum) %>
- 	</td>
+  	<!-- <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130 curriculum_trash"></i>'.html_safe, remove_curriculum_path(curriculum) %> -->
+  	<i class="ace-icon fa fa-trash-o bigger-130 curriculum_trash" id="remove_curriculum_<%= curriculum.id %>"></i></td>
 </tr>
