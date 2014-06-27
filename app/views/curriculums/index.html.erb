@@ -23,7 +23,7 @@
       </thead>
 
       <tbody>
-        <% @curriculums.each do |curriculum| %>
+        <% @my_curriculums.each do |curriculum| %>
           <tr>
             <td class="center"><%= curriculum.id %></td>
             <td class="center"><%= curriculum.c_code %></td>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="center">
-      <%= will_paginate @curriculums, renderer: BootstrapPagination::Rails %>
+      <%= will_paginate @my_curriculums, renderer: BootstrapPagination::Rails %>
     </div>
   </div>
 

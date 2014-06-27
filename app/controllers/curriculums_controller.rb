@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class CurriculumsController < ApplicationController
   before_action :set_curriculum, only: [:show, :edit, :update, :destroy]
 
@@ -7,14 +9,15 @@ class CurriculumsController < ApplicationController
     session_remove()
 
     if current_user.authorize == "super"
-      @curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)
+      #@curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)
+      @my_curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)      
     else
       if current_user.curriculums != nil
         curriculum_ids = []
         current_user.curriculums.each do |curriculum|
           curriculum_ids.push(curriculum)
         end
-        @curriculums = Curriculum.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
+        @my_curriculums = Curriculum.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
       end
     end
   end

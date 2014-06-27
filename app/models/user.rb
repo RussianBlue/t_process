@@ -61,5 +61,4 @@ class User < ActiveRecord::Base
     @password = new_password
     self.encrypted_password = @password
   end
-
 end

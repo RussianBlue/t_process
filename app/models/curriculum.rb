@@ -1,9 +1,6 @@
 class Curriculum < ActiveRecord::Base
-	#
-	# has_and_belongs_to_many :users
 	has_many :user_curriculums
 	has_many :users, :through => :user_curriculums
-	
 	belongs_to :project
 	has_many :progresses
 	has_many :products
