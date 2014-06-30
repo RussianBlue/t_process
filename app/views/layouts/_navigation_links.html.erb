@@ -1,5 +1,6 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
+	<li><a href="#"><%= current_user.name %> 님 환영합니다.</a></li>
   <li><%= link_to 'MY PAGE', edit_user_registration_path %></li>
   <li><%= link_to '로그아웃', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>

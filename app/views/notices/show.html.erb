@@ -12,13 +12,13 @@
     <div class="hr hr-12 dotted hr-single"></div>
     <p>
       <span class="sp-board-id">
-        <%= link_to '<i class="ace-icon fa fa-comment blue"></i>'.html_safe, '',
+        <%= link_to '<i class="ace-icon fa fa-comment blue"></i>'.html_safe, new_message_path(:user => @board.user),
                     'data-rel' => 'tooltip',
                     'data-placement' => 'top',
                     'title' => '메세지보내기' %> <%= @board.user.name %>
       </span>
       <span class="sp-board-email">
-        <%= link_to '<i class="ace-icon fa fa-envelope purple"></i>'.html_safe, '',
+        <%= mail_to @board.user.email, '<i class="ace-icon fa fa-envelope purple"></i>'.html_safe,
                     'data-rel' => 'tooltip',
                     'data-placement' => 'top',
                     'title' => '이메일보내기' %> <%= @board.user.email %>

@@ -17,9 +17,9 @@ class ProjectsController < ApplicationController
         current_user_project.each do |curriculum|
           curriculum_ids.push(curriculum.project)
         end
-        @projects = Project.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
-
-        @projects = Project.where(:id => curriculum_ids).search(params[:search]).paginate(:page => params[:page], :per_page => 10)
+        @projects = Project.where(:id => curriculum_ids).where.not(:finish => true).paginate(:page => params[:page], :per_page => 10)
+        
+        @projects = Project.where(:id => curriculum_ids).search(params[:search]).where.not(:finish => true).paginate(:page => params[:page], :per_page => 10)
       end
     end
     

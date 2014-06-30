@@ -1,9 +1,15 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  helper_method :message_user
+  helper_method :message_user, :message_user_celp_no
 
   def message_user(num)
-    @message_user = User.find_by_celp_no(num)
+    message_user = User.find_by_celp_no(num)
+  end
+
+  def message_user_celp_no(num)
+    message_user_celp_no = User.find(num).celp_no.to_s
+    #logger.info { "message = #{message_user_celp_no}" }
+    return message_user_celp_no.to_s
   end
 
   # GET /messages
