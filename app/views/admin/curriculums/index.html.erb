@@ -32,7 +32,6 @@
         <thead class="dark-purple">
         <tr>
           <th class="center">번호</th>
-          <th class="center">프로젝트명</th>
           <th class="center">과정명</th>
           <th class="center">과정코드</th>
           <th class="center">총차시수</th>
@@ -49,7 +48,6 @@
         <% @curriculums.each do |curriculum| %>
          <tr>
             <td class="center"><%= curriculum.id %></td>
-            <th class="center"><%= curriculum.project.title %></th>
             <th class="center"><%= curriculum.title %></th>
             <th class="center"><%= curriculum.c_code %></th>
             <td class="center"><%= curriculum.total %></td>

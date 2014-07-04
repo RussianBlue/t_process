@@ -54,7 +54,9 @@
           </tbody>
         </table>
       </div><!-- /.table-responsive -->
-      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+      <div class="center">
+        <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+      </div>
     </div>
   </div>
  </div>
