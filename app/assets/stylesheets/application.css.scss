@@ -20,6 +20,12 @@ body.modal-open
 	margin-right:0px;
 }
 
+div.my_cu_scroll{
+	overflow-x: hidden; 
+	overflow-y: auto;
+	height:617px;
+}
+
 a:hover
 {
 	background:none;

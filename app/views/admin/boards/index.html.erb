@@ -57,14 +57,7 @@
               <span class="btn btn-xs btn-primary" data-rel='tooltip' data-toggle="tooltip" data-placement="bottom" title='<%= board.content %>'>내용 미리 보기</a>
             </td>
             <td class="center">
-              <% if board.data_file_name != nil %>
-                <%= link_to '<i class="ace-icon fa fa-download pink"></i>'.html_safe, download_notice_path(current_project, board), 
-                :target => "_blank",
-                'data-rel'       => 'tooltip', 
-                'data-toggle'    => "tooltip", 
-                'data-placement' => "bottom",
-                'title' => board.data_file_name %>
-              <% end %>
+              <%= board.data_file_name %>
             </td>
             <td class="center"><%= board.user.name %></td>
             <td class="center"><%= board.created_at %></td>

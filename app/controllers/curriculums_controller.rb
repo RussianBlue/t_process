@@ -8,7 +8,7 @@ class CurriculumsController < ApplicationController
   def index
     session_remove()
 
-    if current_user.authorize == "super"
+    if current_user.authorize =~ /super|admin/
       #@curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)
       @my_curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)      
     else

@@ -34,16 +34,17 @@
 			<div class="tree_menu">
 				<span class="menu-text"><i class="icon-only ace-icon fa fa-align-justify"></i> 내 과정목록	</span>
 			</div>
+			<div class="my_cu_scroll">
+		    <ul class="nav nav-list tree">
+		      <!-- 좌측서브메뉴 붙일 부분 -->
 
-	    <ul class="nav nav-list tree">
-	      <!-- 좌측서브메뉴 붙일 부분 -->
-
-	      <% if user_curriculums != nil %>
-					<% user_curriculums.each do |curriculum| %>
-						<%= render partial: 'layouts/left_curriculums', locals:{curriculum:curriculum} %>
-					<% end %>
-	     	<% end %>
-	    </ul>
+		      <% if user_curriculums != nil %>
+						<% user_curriculums.each do |curriculum| %>
+							<%= render partial: 'layouts/left_curriculums', locals:{curriculum:curriculum} %>
+						<% end %>
+		     	<% end %>
+		    </ul>
+		   </div>
 		</li>
 		<!-- 내 과정목록 -->
 	</ul>
