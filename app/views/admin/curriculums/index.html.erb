@@ -1,0 +1,83 @@
+<div class="page-content">
+  <div class="space-8"></div>
+  <div class="page-header">
+    <h1>
+      과정관리
+      <small>
+        <i class="ace-icon fa fa-hand-o-right"></i>
+        curriculums
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_tag '', :method => 'get', :id => "curriculum_search" do %>
+        <div class="row">
+          <div class="col-sm-8 col-xs-6">
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], :class => 'form-control search-query', :placeholder => '검색하실 과정명 또는 과정코드를 입력하세요.' %>
+              <span class="input-group-btn">
+                <%= button_tag(:type => "submit", :class => 'btn btn-purple btn-sm') do %>
+                  <i class='icon-search fa fa-plus bigger-110'></i> 검색
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="space"></div>
+
+      <div class="table">
+      <table id="table" class="table table-striped table-bordered table-hover" data-role="table">
+        <thead class="dark-purple">
+        <tr>
+          <th class="center">번호</th>
+          <th class="center">프로젝트명</th>
+          <th class="center">과정명</th>
+          <th class="center">과정코드</th>
+          <th class="center">총차시수</th>
+          <th class="center">경로</th>
+          <th class="center">가로</th>
+          <th class="center">세로</th>
+          <th class="center">생성일</th>
+          <th class="center">업데이트일</th>
+          <th class="center">삭제</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @curriculums.each do |curriculum| %>
+         <tr>
+            <td class="center"><%= curriculum.id %></td>
+            <th class="center"><%= curriculum.project.title %></th>
+            <th class="center"><%= curriculum.title %></th>
+            <th class="center"><%= curriculum.c_code %></th>
+            <td class="center"><%= curriculum.total %></td>
+            <td class="center"><%= curriculum.location %></td>
+            <th class="center"><%= curriculum.width %></th>
+            <th class="center"><%= curriculum.height %></th>
+            <th class="center"><%= curriculum.created_at %></th>
+            <th class="center"><%= curriculum.updated_at %></th>
+            <td class="center">
+              <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
+                  delete_curriculum_path(curriculum), 
+                  method: :delete, 
+                  data: { confirm: '삭제하시겠습니까?' }, 
+                  :class           => 'red',                          
+                  'data-rel'       => 'tooltip', 
+                  'data-toggle'    => "tooltip", 
+                  'data-placement' => "bottom", 
+                  'title'          => "삭제" 
+              %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    </div>
+
+    <div class="center">
+      <%= will_paginate @curriculums, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>

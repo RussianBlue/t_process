@@ -96,6 +96,10 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    @project.boards.each do |board|
+      board.delete
+    end
+
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: '프로젝트가 삭제되었습니다.' }

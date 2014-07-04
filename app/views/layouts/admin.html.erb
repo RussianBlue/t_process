@@ -10,15 +10,6 @@
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="/ace/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-    
-    <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="/ace/css/jquery-ui.custom.min.css" />
-    <link rel="stylesheet" href="/ace/css/chosen.css" />
-    <link rel="stylesheet" href="/ace/css/datepicker.css" />
-    <link rel="stylesheet" href="/ace/css/bootstrap-timepicker.css" />
-    <link rel="stylesheet" href="/ace/css/daterangepicker.css" />
-    <link rel="stylesheet" href="/ace/css/bootstrap-datetimepicker.css" />
-    <link rel="stylesheet" href="/ace/css/colorpicker.css" />
   
     <!-- text fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
@@ -33,6 +24,15 @@
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="/ace/css/ace-part2.min.css" />
     <![endif]-->
+    
+     <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="/ace/css/jquery-ui.custom.min.css" />
+    <link rel="stylesheet" href="/ace/css/chosen.css" />
+    <link rel="stylesheet" href="/ace/css/datepicker.css" />
+    <link rel="stylesheet" href="/ace/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/ace/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/ace/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="/ace/css/colorpicker.css" />
     <link rel="stylesheet" href="/ace/css/ace-skins.min.css" />
     <link rel="stylesheet" href="/ace/css/ace-rtl.min.css" />
 
@@ -101,5 +101,12 @@
     <script src="/ace/js/ace-elements.min.js"></script>
     <script src="/ace/js/ace.min.js"></script>
 
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {  
+        $('[data-rel=tooltip]').tooltip({container:'body'});
+        $('[data-rel=popover]').popover({container:'body'}); 
+
+      });
+    </script>
   </body>
 </html>

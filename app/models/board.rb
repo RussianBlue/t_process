@@ -15,6 +15,14 @@ class Board < ActiveRecord::Base
   									 :message => '파일은 ZIP, PDF, 파워포인트, 엑셀, 워드, 한글 형식만 업로드 가능합니다.' },
   :size => { :in => 0..30.megabyte }
 
+  def self.search(search)
+    if search
+      where("title LIKE ? OR content like ?", "%#{search}%", "%#{search}%")
+    else
+      scoped
+    end
+  end
+
   NOTICE_HEADS     = ['공지', '요청사항', '기타']
   STORYBOARD_HEADS = ['스토리보드', '요청사항', '피드백', '기타']
   SCRIPT_HEADS     = ['원고', '요청사항', '피드백', '기타']

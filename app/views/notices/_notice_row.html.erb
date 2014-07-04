@@ -12,11 +12,7 @@
   <td class="board_title" style="padding-left:<%= board.level.to_i * 20%>px;">
   	<% if board.level != 1 %>
   		<i class="ace-icon fa fa-level-up blue"></i>
-  		<% if find_original(board.group_no) != nil %>
-        <span class="text-danger"> [답글]</span>
-      <% else %>
-        <span class="text-danger"> [삭제된 게시물에 대한 답변입니다.]</span>
-      <% end %>
+  		<span class="text-danger"> [답글]</span>
 	    <%= link_to board.title, notice_path(current_project, board) %>
 
 	    <% if new_tag(board.created_at) == true %>

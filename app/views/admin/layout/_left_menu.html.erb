@@ -23,12 +23,26 @@
 		<li class="firewalls">
 			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, firewalls_path %>
 		</li>
+		<li class="boards">
+			<%= link_to '<i class="menu-icon fa fa-comments"></i><span class="menu-text">게시글 관리</span>'.html_safe, boards_index_path %>
+		</li>
+
+		<li class="projects">
+			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">프로젝트 관리</span>'.html_safe, projects_index_path %>
+		</li>
+
+		<li class="curriculums">
+			<%= link_to '<i class="menu-icon fa fa-leaf"></i><span class="menu-text">과정 관리</span>'.html_safe, curriculums_index_path %>
+		</li>
+		<!-- <li class="messagess">
+			<%= link_to '<i class="menu-icon fa fa-comment-o"></i><span class="menu-text">메세지 관리</span>'.html_safe, messagess_index_path %>
+		</li> -->
 	</ul>
 </div>
 
 <script type="text/javascript">
 	var _loc = document.location.href
-	var _arr = ["user_role", "firewall"]
+	var _arr = ["user_role", "firewall","boards","projects","curriculums","messagess"]
 
 	setDefault();
 
@@ -38,6 +52,21 @@
 		$('.user_role').addClass("active");
 	}else if(_loc.indexOf("firewalls") != -1){
 		$('.firewalls').addClass("active");
+	}else{
+		var tmp = "."+_arr[find_location()];
+		$(tmp).addClass("active");
+	}
+
+	function find_location(){
+		var stmp = 0;
+
+		for(i=0; i<_arr.length; i++){
+			if(_loc.indexOf(_arr[i]) != -1){
+				stmp = i;
+				break;
+			}
+		}
+		return stmp;
 	}
 
 	function setDefault()

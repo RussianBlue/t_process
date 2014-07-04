@@ -11,6 +11,15 @@ TProcess::Application.routes.draw do
         get "add_curriculum/:curriculum_id" => 'user_role#add_curriculum', :as => 'add_curriculum'
         get "remove_curriculum/:curriculum_id" => 'user_role#remove_curriculum', :as => 'remove_curriculum'
      end
+
+     get "boards/index"
+     delete "boards/:id" => 'boards#remove_board', :as => 'delete_board'
+     get "messagess/index"
+     delete "messagess/:id" => 'messagess#remove_message', :as => 'delete_message'
+     get "curriculums/index"
+     delete "curriculums/:id" => 'curriculums#remove_curriculum', :as => 'delete_curriculum'
+     get "projects/index"
+     delete "projects/id" => 'projects#remove_project', :as => 'delete_project'
   end
 
   scope '/projects/:project_id' do
