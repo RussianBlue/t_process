@@ -8,6 +8,8 @@ class Board < ActiveRecord::Base
 
 	validates_presence_of :pre_title, :on => :create, :message => "머릿말을 선택해 주세요."
 	validates_presence_of :title, :on => :create, :message => "제목을 입력해 주세요."
+  validates_length_of :title, :minimum => 1, :maximum => 100
+
 	validates_presence_of :content, :on => :create, :message => "내용을 입력해 주세요."
   
   validates_attachment :data,

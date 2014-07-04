@@ -38,6 +38,16 @@
       </dl>
     <% end %>
 
+    <% if @board.errors.any? %>
+      <% if @board.errors[:data][0].to_s != "" %>
+        <dl>
+          <span class="help-inline">
+            파일은 ZIP, PDF, 파워포인트, 엑셀, 워드, 한글 형식만 업로드 가능합니다.
+          </span>
+        </dl>
+      <% end %>
+    <% end %>
+
     <%= f.label :content, '<i class="fa fa-chevron-right  orange"></i> 내용'.html_safe, :class => 'form-label'%>
     <!-- <div class="wysiwyg-editor" id="editor1"></div> -->
     <%= f.input :content,

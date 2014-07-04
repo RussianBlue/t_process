@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624234313) do
+ActiveRecord::Schema.define(version: 20140704045736) do
 
   create_table "board_categories", force: true do |t|
     t.integer "category_id"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20140624234313) do
     t.string   "title",             limit: 100
     t.string   "pre_title",         limit: 10
     t.integer  "user_id"
-    t.integer  "count_at",                      default: 0
-    t.string   "content"
+    t.integer  "count_at",                           default: 0
+    t.text     "content",           limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "data_file_name"

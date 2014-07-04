@@ -14,7 +14,7 @@ class Curriculum < ActiveRecord::Base
 	
 	validates_uniqueness_of :title, :on => :create, :message => "같은 이름의 과정명이 있습니다."
 	validate :total, :length => { :maximum => 3 }
-
+	
 	validates_numericality_of :width, :greater_than => 100, :less_than => 1500, :message => "100~1500 사이의 올바른 숫자를 입력해주세요."
 	validates_numericality_of :height, :greater_than => 100, :less_than => 1000, :message => "100~1000 사이의 올바른 숫자를 입력해주세요."
 
