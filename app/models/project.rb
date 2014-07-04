@@ -8,10 +8,8 @@ class Project < ActiveRecord::Base
 	validates_presence_of :title, :on => :create, :message => "프로젝트명을 입력해 주세요."
 	validates_presence_of :years, :on => :create, :message => "년도를 선택해 주세요."
 	
-	validates :title, uniqueness: true, :maximum => 255
-  validates :width, :maximum => 11
-  validates :height, :maximum => 11
-			
+	validates :title, uniqueness: true
+  			
 	#validates_presence_of :width, :on => :create, :message => "입력해 주세요."
 	#validates_presence_of :height, :on => :create, :message => "입력해 주세요."
 
