@@ -1,9 +1,9 @@
 class Admin::CurriculumsController < ApplicationController
   before_action :set_curriculums, only: [:remove_curriculum]
   def index
-    @curriculums = Curriculum.paginate(:page => params[:page], :per_page => 10)
+    @curriculums = Curriculum.order("ID DESC").paginate(:page => params[:page], :per_page => 10)
 
-    @curriculums = Curriculum.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
+    @curriculums = Curriculum.order("ID DESC").search(params[:search]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def remove_curriculum

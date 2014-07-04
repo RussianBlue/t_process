@@ -1,9 +1,9 @@
 class Admin::ProjectsController < ApplicationController
   before_action :set_project, only: [:remove_project]
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 10)
+    @projects = Project.order("ID DESC").paginate(:page => params[:page], :per_page => 10)
 
-    @projects = Project.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
+    @projects = Project.order("ID DESC").search(params[:search]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def remove_project

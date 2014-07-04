@@ -1,9 +1,9 @@
 class Admin::BoardsController < ApplicationController
   before_action :set_board, only: [:remove_board]
   def index
-    @boards = Board.paginate(:page => params[:page], :per_page => 10)
+    @boards = Board.order("ID DESC").paginate(:page => params[:page], :per_page => 10)
 
-    @boards = Board.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
+    @boards = Board.order("ID DESC").search(params[:search]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def remove_board
