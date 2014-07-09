@@ -11,12 +11,15 @@ class Board < ActiveRecord::Base
   validates_length_of :title, :minimum => 1, :maximum => 100
 
 	validates_presence_of :content, :on => :create, :message => "내용을 입력해 주세요."
-  
-  validates_attachment :data,
-  :content_type => { :content_type => [/\Aimage\/.*\Z/, /\Aapplication\/.*\Z/, /\Aaudio\/.*\Z/, /\Atext\/.*\Z/, /\Avideo\/.*\Z/], 
-  									 :message => '파일은 ZIP, PDF, 파워포인트, 엑셀, 워드, 한글 형식만 업로드 가능합니다.' },
-  :size => { :in => 0..30.megabyte }
 
+  VALID_CONTENT_TYPES = [/\Aimage\/.*\Z/, /\Aapplication\/.*\Z/, /\Aaudio\/.*\Z/, /\Atext\/.*\Z/, /\Avideo\/.*\Z/, 'application/octet-stream']
+
+  validates_attachment :data, content_type: { 
+    :content_type => VALID_CONTENT_TYPES, 
+    :message => '파일은 이미지, ZIP, PDF, 파워포인트, 엑셀, 워드 형식만 업로드 가능합니다. 기타 파일은 압축해서 올려주세요.' 
+  }, 
+  :size => { :in => 0..100.megabyte }
+   
   def self.search(search)
     if search
       where("title LIKE ? OR content like ?", "%#{search}%", "%#{search}%")

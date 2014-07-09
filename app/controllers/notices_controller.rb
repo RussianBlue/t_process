@@ -21,10 +21,10 @@ class NoticesController < ApplicationController
 
     if session[:curriculum_id] != nil
       #@boards = @project.boards.order('id DESC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 10)
-      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 10)
+      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id_and_curriculum_id(@current_category, session[:curriculum_id].to_i).paginate(:page => params[:page], :per_page => 2)
     else
       #@boards = @project.boards.order('id DESC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 10)
-      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 10)
+      @boards = @project.boards.order('group_no DESC').order('seq_no ASC').find_all_by_category_id(@current_category).paginate(:page => params[:page], :per_page => 2)
     end
   end
 

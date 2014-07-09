@@ -19,7 +19,7 @@
 			</li>
 			<% if current_user.authorize =~ /super|admin|user/ %>
 				<li class="progresses">
-					<%= link_to '<i class="menu-icon fa fa-caret-right"></i>공정률'.html_safe, curriculum_progresses_path(current_project, :curriculum_id => curriculum.id, :c_type => "progresses") %>
+					<%= link_to '<i class="menu-icon fa fa-caret-right"></i>과정진행률'.html_safe, curriculum_progresses_path(current_project, :curriculum_id => curriculum.id, :c_type => "progresses") %>
 				</li>
 			<% end %>
 			<li class="products">
