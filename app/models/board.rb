@@ -33,4 +33,8 @@ class Board < ActiveRecord::Base
   SCRIPT_HEADS     = ['원고', '요청사항', '피드백', '기타']
   DOCUMENT_HEADS   = ['문서', '전달', '기타']
   OTHER_HEADS      = ["기타"]
+
+  def set_content_type
+    self.data_content_type(:content_type, MIME::Types.type_for(self.data_content_type).to_s)
+  end
 end

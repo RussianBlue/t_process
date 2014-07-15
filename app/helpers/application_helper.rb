@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def new_tag(time)
-    if time > (Date.today - 1)
-      true
+    if time > Date.today - 1
+      return true
     else
-      false
+      return false
     end
   end
 end
