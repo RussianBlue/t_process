@@ -11,6 +11,7 @@ module ProductsHelper
 	def set_group_title (count)
 		last_lesson = 0;
 		1.upto(count) do |total|
+			logger.info { "last_lesson = #{@group_lesson} total = #{total}" }
 			last_lesson += @group_lesson[total]
 		end
 		group_title = (20*(count-1)+1).to_s + "차시 ~ " + last_lesson.to_s + "차시"
@@ -34,7 +35,6 @@ module ProductsHelper
 		# else
 			
 		# end
-
 		return (((group-1) * 20) + set_tables(@group_lesson[group])) - 1
 	end
 

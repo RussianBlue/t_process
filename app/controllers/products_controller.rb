@@ -31,7 +31,8 @@ class ProductsController < ApplicationController
     lesson_total = @curriculum.total
 
     #그룹 수
-    @group_count = lesson_total /20
+    @group_count = lesson_total / 20
+
     if((lesson_total%20) != 0)
       @group_count += 1
     end
@@ -42,6 +43,9 @@ class ProductsController < ApplicationController
     1.upto(@group_count) do |k|
       if @group_count == k
         @group_lesson[k] = lesson_total % 20
+        if lesson_total == 20
+          @group_lesson[k] = 20
+        end
       else
         @group_lesson[k] = 20
       end
