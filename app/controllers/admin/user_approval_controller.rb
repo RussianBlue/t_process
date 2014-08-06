@@ -2,7 +2,7 @@ class Admin::UserApprovalController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-  	@users = User.all.order('ID DESC').paginate(:page => params[:page], :per_page => 10)
+  	@users = User.paginate(:page => params[:page], :per_page => 10)
 
     @users = User.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
   end

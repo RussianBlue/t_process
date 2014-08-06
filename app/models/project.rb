@@ -26,4 +26,6 @@ class Project < ActiveRecord::Base
       scoped
     end
   end
+  
+  default_scope order('id DESC')
 end

@@ -61,4 +61,6 @@ class User < ActiveRecord::Base
     @password = new_password
     self.encrypted_password = @password
   end
+
+  default_scope order('id DESC')
 end
