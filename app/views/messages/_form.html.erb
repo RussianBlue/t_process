@@ -150,10 +150,9 @@
 
   jQuery(function($){
     //MMS, SMS 판단
-    $('textarea[name="message[text]"]').on('input',function(e){
+    $('textarea[name="message[content]"]').on('input',function(e){
       var _text = $(this).val();
       var _label = $('span.m-type');
-
       if(_text.length > 45){
         _label.removeClass("label-success");
         _label.addClass("label-danger");

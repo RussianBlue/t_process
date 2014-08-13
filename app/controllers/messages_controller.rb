@@ -23,8 +23,8 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @api_key = "NCS5354DDFD66C1C"
-    api_secret = "324E34C96853118834644122C471EC11"
+    @api_key = "NCS53EAD9558BDE2"
+    api_secret = "54FA03CD7E6140534F3C8ED6D6F552EB"
 
     @timestamp = Time.now.to_i
     @salt = SecureRandom.base64
@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
     @user = current_user
 
     to_list = @message.to.split(",").map(&:to_s)
-
+    logger.info { "api key = #{@signature}" }
     @userlists = []
 
     to_list.each do |num|

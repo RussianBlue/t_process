@@ -7,7 +7,7 @@
   <input type="hidden" name="to" value="<%= @message.to %>" />
   <input type="hidden" name="from" value="<%= @user.celp_no %>" />
   <input type="hidden" name="type" value="<%= @message.m_type %>" />
-  <input type="hidden" name="subject" value="트리짓소프트웨어입니다." />  
+  <input type="hidden" name="subject" value="트리짓소프트웨어입니다." />
   <input type="hidden" name="text" value="<%= @message.content %>" />
 </form>
 
@@ -15,24 +15,27 @@
 
 <script type="text/javascript">
   var form = $('form[name=sms]');
-  /*
+  
   $.ajaxPrefilter('json', function(options, orig, jqXHR) {
       return 'jsonp';
   });
 
-  $.ajax({      
-    type:"post", 
-    url:'https://api.coolsms.co.kr/1/send',
-    dataType:'text',
-    success: function( data, textStatus, jqXHR ){
-        var cData = eval( '(' + data + ')' );
-        alert(cData);
-    },   
-    error:function(e){
-        alert("BB");
-    }  
+  form.submit();
+
+  form.submit(function(){
+    $.ajax({
+      type:"post", 
+      url:'https://api.coolsms.co.kr/1/send',
+      dataType:'text',
+      success: function( data, textStatus, jqXHR ){
+          var cData = eval( '(' + data + ')' );
+          //alert("data = " + cData);
+      },   
+      error:function(e){
+        //alert("error = " + e)
+      }  
+    });
   });
-  */
 </script>
 
 <div class="page-content">
@@ -75,4 +78,4 @@
       </div><!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->
   </div><!-- /.row -->
-</div><!-- /.page-content -->
+</div><!-- /.page-content -->.

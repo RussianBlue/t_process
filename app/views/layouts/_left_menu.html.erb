@@ -21,10 +21,10 @@
 			<%= link_to '<i class="menu-icon fa fa-folder-o"></i><span class="menu-text">공통문서</span>'.html_safe, notices_path(current_project, :category_id => 2) %>
 		</li>
 		<% if current_user.authorize =~ /super|admin|user/ %>
-			<!-- <li class="messages">
+			<li class="messages">
 				<%= link_to '<i class="menu-icon fa fa-comment-o"></i><span class="menu-text">
 				SMS</span>'.html_safe, messages_path(current_project) %>
-			</li> -->
+			</li>
 		<% end %>
 		<!-- 관리자만 보여야 할 부분 -->
 		<% if current_user.authorize =~ /super|admin/ %>
