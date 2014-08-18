@@ -6,9 +6,9 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if current_user.authorize == "super" || current_user.authorize == "admin"
-      @projects = Project.paginate(:page => params[:page], :per_page => 10)
+      @projects = Project.order("ID DESC").paginate(:page => params[:page], :per_page => 10)
 
-      @projects = Project.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
+      @projects = Project.search(params[:search]).order("ID DESC").paginate(:page => params[:page], :per_page => 10)
     else
       current_user_project = current_user.curriculums
 
@@ -17,9 +17,9 @@ class ProjectsController < ApplicationController
         current_user_project.each do |curriculum|
           curriculum_ids.push(curriculum.project)
         end
-        @projects = Project.where(:id => curriculum_ids).where.not(:finish => true).paginate(:page => params[:page], :per_page => 10)
+        @projects = Project.where(:id => curriculum_ids).where.not(:finish => true).order("ID DESC").paginate(:page => params[:page], :per_page => 10)
         
-        @projects = Project.where(:id => curriculum_ids).search(params[:search]).where.not(:finish => true).paginate(:page => params[:page], :per_page => 10)
+        @projects = Project.where(:id => curriculum_ids).search(params[:search]).where.not(:finish => true).order("ID DESC").paginate(:page => params[:page], :per_page => 10)
       end
     end
     

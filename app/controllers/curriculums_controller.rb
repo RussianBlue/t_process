@@ -10,14 +10,14 @@ class CurriculumsController < ApplicationController
 
     if current_user.authorize =~ /super|admin/
       #@curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)
-      @my_curriculums = Curriculum.where(:project_id => current_project).paginate(:page => params[:page], :per_page => 10)      
+      @my_curriculums = Curriculum.where(:project_id => current_project).order("ID DESC").paginate(:page => params[:page], :per_page => 10)      
     else
       if current_user.curriculums != nil
         curriculum_ids = []
         current_user.curriculums.each do |curriculum|
           curriculum_ids.push(curriculum)
         end
-        @my_curriculums = Curriculum.where(:id => curriculum_ids).paginate(:page => params[:page], :per_page => 10)
+        @my_curriculums = Curriculum.where(:id => curriculum_ids).order("ID DESC").paginate(:page => params[:page], :per_page => 10)
       end
     end
   end
@@ -84,7 +84,7 @@ class CurriculumsController < ApplicationController
         product.content_use = 0
         product.save
       end
-    end   
+    end
 
     respond_to do |format|
       if @curriculum.save

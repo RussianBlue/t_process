@@ -27,5 +27,5 @@ class Project < ActiveRecord::Base
     end
   end
   
-  default_scope order('id DESC')
+  #default_scope order('id DESC')
 end
