@@ -41,7 +41,9 @@
           <th class="center">프로젝트세로</th>
           <th class="center">생성일</th>
           <th class="center">업데이트일</th>
-          <th class="center">삭제</th>
+          <% if current_user.authorize =~ /super/ %>
+            <th class="center">삭제</th>
+          <% end %>
         </tr>
       </thead>
 
@@ -58,18 +60,20 @@
             <th class="center"><%= project.height %></th>
             <th class="center"><%= project.created_at %></th>
             <th class="center"><%= project.updated_at %></th>
-            <td class="center">
-              <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
-                  delete_project_path(project), 
-                  method: :delete, 
-                  data: { confirm: '삭제하시겠습니까?' }, 
-                  :class           => 'red',                          
-                  'data-rel'       => 'tooltip', 
-                  'data-toggle'    => "tooltip", 
-                  'data-placement' => "bottom", 
-                  'title'          => "삭제" 
-              %>
-            </td>
+            <% if current_user.authorize =~ /super/ %>
+              <td class="center">
+                <%= link_to '<i class="ace-icon fa fa-trash-o bigger-130"></i>'.html_safe, 
+                    delete_project_path(project), 
+                    method: :delete, 
+                    data: { confirm: '삭제하시겠습니까?' }, 
+                    :class           => 'red',                          
+                    'data-rel'       => 'tooltip', 
+                    'data-toggle'    => "tooltip", 
+                    'data-placement' => "bottom", 
+                    'title'          => "삭제" 
+                %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

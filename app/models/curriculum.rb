@@ -6,7 +6,7 @@ class Curriculum < ActiveRecord::Base
 	has_many :products
 
 	validates_presence_of :total, :on => :create, :message => "총 차시수를 입력해 주세요."
-	validates_numericality_of :total, :greater_than => 1, :less_than => 50, :message => "1~50 사이의 올바른 숫자를 입력해주세요."
+	validates_numericality_of :total, :greater_than => 0, :less_than => 50, :message => "1~50 사이의 올바른 숫자를 입력해주세요."
 	validates_presence_of :title, :on => :create, :message => "과정명을 입력해 주세요."
 	validates_uniqueness_of :title, :on => :create, :message => "이미 있는 과정입니다."
 	validates_presence_of :location, :message => "공통 경로를 입력해 주세요."

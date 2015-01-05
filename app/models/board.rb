@@ -28,6 +28,15 @@ class Board < ActiveRecord::Base
     end
   end
 
+  def self.searchBoard(search)
+    if search
+      user_name = User.user_name_to_id(search).map(&:id)[0]
+      where("user_id like ?", "%#{user_name}%")
+    else
+      scoped
+    end
+  end
+
   NOTICE_HEADS     = ['공지', '요청사항', '기타']
   STORYBOARD_HEADS = ['스토리보드', '요청사항', '피드백', '기타']
   SCRIPT_HEADS     = ['원고', '요청사항', '피드백', '기타']

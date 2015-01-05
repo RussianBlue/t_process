@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   #attr_accessible :email, :password, :password_confirmation, :company, :name, :role_type, :celp_no
 
+  scope :user_name_to_id, -> (name) { where name: name }
+
   validates_presence_of :name
   validates_presence_of :company
   validates_presence_of :role_type

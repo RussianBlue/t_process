@@ -20,9 +20,11 @@
 				<li class=""><%= link_to '<i class="menu-icon fa fa-caret-right"></i><span class="menu-text">사용자 과정 관리</span>'.html_safe, user_role_index_path %></li>
 			</ul>
 		</li>
-		<li class="firewalls">
-			<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, firewalls_path %>
-		</li>
+		<% if current_user.authorize =~ /super/ %>
+			<li class="firewalls">
+				<%= link_to '<i class="menu-icon fa fa-barcode"></i><span class="menu-text">접근 관리</span>'.html_safe, firewalls_path %>
+			</li>
+		<% end %>
 		<li class="boards">
 			<%= link_to '<i class="menu-icon fa fa-comments"></i><span class="menu-text">게시글 관리</span>'.html_safe, boards_index_path %>
 		</li>

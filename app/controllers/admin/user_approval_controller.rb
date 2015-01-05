@@ -26,6 +26,8 @@ class Admin::UserApprovalController < ApplicationController
   	@user.approval = params[:approval]
   	@user.authorize = params[:authorize]
 
+    @user.approval_user = current_user.id
+
   	respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_approval_index_path, notice: '사용자 정보가 수정되었습니다.' }
