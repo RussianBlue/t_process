@@ -31,6 +31,7 @@ class Board < ActiveRecord::Base
   def self.searchBoard(search)
     if search
       user_name = User.user_name_to_id(search).map(&:id)[0]
+      logger.info{"name = #{user_name}"}
       where("user_id like ?", "%#{user_name}%")
     else
       scoped
