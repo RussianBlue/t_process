@@ -25,8 +25,8 @@ class Admin::UserApprovalController < ApplicationController
 
   	@user.approval = params[:approval]
   	@user.authorize = params[:authorize]
-
-    #@user.approval_user = current_user.id
+    logger.info { "c = #{current_user.id.to_s}" }
+    #@user.approval_user = current_user.id.to_s
 
   	respond_to do |format|
       if @user.update(user_params)

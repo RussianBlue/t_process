@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 	#validates_numericality_of :width, :greater_than => 100, :less_than => 1500, :message => "100~1500 올바른 숫자를 입력해주세요."
 	#validates_numericality_of :height, :greater_than => 100, :less_than => 1000, :message => "100~1000 올바른 숫자를 입력해주세요."
 
-	YEARS = ["2014", "2013", "2012", "2011", "2010"]
+	YEARS = ["2015", "2014", "2013", "2012", "2011", "2010"]
 	FINISH = [["N", false], ["Y", true]]
 
 	def self.search(search)
