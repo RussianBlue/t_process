@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704045736) do
+ActiveRecord::Schema.define(version: 20150429060300) do
 
   create_table "board_categories", force: true do |t|
     t.integer "category_id"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 20140704045736) do
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "board_ids"
+    t.string   "board_id"
   end
 
   create_table "roles", force: true do |t|
