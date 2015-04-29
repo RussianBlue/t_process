@@ -1,4 +1,4 @@
-lock '3.2.1'
+lock '3.4.0'
 
 set :application, 't_process'
 set :repo_url, 'git@github.com:RussianBlue/t_process.git'
