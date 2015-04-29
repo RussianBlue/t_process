@@ -20,7 +20,9 @@ module ApplicationHelper
     end
   end
 
-  
+  def current_board_title(board_id)
+    boards_id = BoardCategory.find(board_id)
+  end
 
   def boolean_type_oxchange(arg)
     arg != true ? "X" : "O"
