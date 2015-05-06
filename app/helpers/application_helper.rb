@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def current_board_title(board_id)
-    boards_id = BoardCategory.find(board_id)
+    @boards_id = BoardCategory.find(board_id.to_i)
   end
 
   def boolean_type_oxchange(arg)
