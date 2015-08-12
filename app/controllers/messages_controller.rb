@@ -81,7 +81,10 @@ class MessagesController < ApplicationController
 
     @message.project_id = current_project.id
     @message.user_id = current_user.id
-    @message.m_type = "SMS"
+
+    logger.info { "messages type = #{@message.m_type}" }
+
+    #@message.m_type = "LMS"
     @message.from = current_user.celp_no
 
     respond_to do |format|

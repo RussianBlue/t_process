@@ -22,6 +22,10 @@
                 <%= f.input :to,
                             :label => false,
                             :class => 'form-control' %>
+                <%= f.input :m_type,
+                            :label => false,
+                            :class => 'form-control',
+                            :as => :hidden %>
                 <span class="m-type label label-success">SMS</span>
               </div>
               <%= javascript_tag do %>
@@ -157,10 +161,12 @@
         _label.removeClass("label-success");
         _label.addClass("label-danger");
         _label.text("LMS");
+        $('input[name="message[m_type]"]').val("LMS");
       }else{
         _label.removeClass("label-danger");
         _label.addClass("label-success");
         _label.text("SMS");
+        $('input[name="message[m_type]"]').val("SMS");
       }
     });
 
